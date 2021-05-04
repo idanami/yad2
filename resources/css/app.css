@@ -1,0 +1,25 @@
+body{
+    font-size: 16px;
+    line-height: 16px;
+    color: #363636;
+    direction: rtl;
+    background: #f9f9f9;
+    margin: 0;
+    font-family: sans-serif;
+}
+main {
+    max-width: 60rem;
+    margin: 0 auto;
+}
+button{
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    background-color: transparent;
+    background-color: initial;
+    outline: none;
+}
+a{
+    cursor: pointer;
+}

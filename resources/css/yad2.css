@@ -1,0 +1,386 @@
+.main-header{
+    position: sticky;
+    display: flex;
+    height:2.8rem;
+    width: 100%;
+    background: #ff7100;
+    top: 0;
+    right: 0;
+}
+.material-icons{
+    color:rgb(0, 0, 0);
+}
+.main-header__mobile{
+    width: 55%;
+    display: flex;
+    justify-content:space-between;
+    align-items:baseline;
+}
+.toggle-button{
+    height:100%;
+    border: none;
+    background: #ff7100;
+    color: white;
+    padding: 0 1.2rem;
+
+}
+.main-header__brand__mobile img{
+    height: 1.5rem;
+
+}
+.main-nav{
+    display: none;
+}
+
+.mobile-searching__property{
+    margin: 0.9rem 0.6rem;
+    padding: 1rem 0.9rem;
+    align-items: center;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
+}
+.search-wrapper,
+.navbar-wrapper{
+    display: none;
+}
+
+.title-description{
+    display: flex;
+    color: #999;
+}
+.title-description div{
+    padding: 0 0.2rem;
+}
+.feed-options{
+    margin-top: 5rem;
+    display: flex;
+}
+.accessibility-btn,
+.showADS,
+.sortBy{
+    display: none;
+}
+.filter-option__mobile{
+    display: none;
+}
+.image-container img{
+    width: 7.8rem;
+    height: 6.25rem;
+}
+
+.feed-options__button{
+    height: 2rem;
+    padding: 0 0.6875rem;
+    margin-left: 0.7rem;
+    border: 1px solid #dbdbdb;
+    background-color: #fff;
+    border-radius: 2px;
+}
+.feed-lists{
+    margin-top: 2rem;
+}
+.feed-list__item{
+    display: flex;
+    position: relative;
+    background-color: #f5f1bf;
+    padding: 5px;
+    border: 1px solid rgba(0,0,0,.1);
+}
+.location-asset{
+    display: flex;
+    width: 100%;
+}
+.location-asset__description{
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+}
+.partial-detail__asset{
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    right: 8.5rem;
+    left: 0;
+    padding: 0.2rem;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+.asset-price{
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 8.5rem;
+    left: 0;
+    padding: 0.5rem;
+    justify-content: space-between;
+}
+.material-icon__asset-price{
+    display: none;
+}
+.partial-detail__asset__data div{
+    font-size: 0.75rem;
+}
+/* //////////////////////////////////////////////// */
+@media (min-width: 45rem) {
+    .main-header{
+        position: unset;
+        height: 4.3rem;
+        background-color: #fff;
+        border-top: 5px solid #ff7100;
+        align-items: center;
+    }
+    .searching-property,
+    .main-header__mobile,
+    .toggle-button{
+        display: none;
+    }
+    .main-nav{
+        width: 100%;
+        height: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.2rem;
+        margin-bottom: 2px;
+        border-bottom: 1px solid #eee;
+    }
+    .main-header__brand img{
+        height: 3.375rem;
+    }
+    .main-nav__items{
+        list-style: none;
+        align-items: center;
+        display: flex;
+        padding: 0;
+    }
+    .main-nav__item{
+        padding: 0 1.2rem;
+    }
+    .new-post__add{
+        height: 2.5rem;
+        border-radius: 1.25rem;
+        background-color: #0fca80;
+        margin: 15px 15px 15px 0;
+        line-height: 2.5rem;
+        font-weight: 500;
+    }
+    .new-post__add a{
+        text-decoration: none;
+    }
+    .new-post__add a span{
+        color: #fff;
+    }
+    .new-post__add a i{
+        color: #fff;
+        vertical-align: super;
+    }
+    .navbar-wrapper{
+        background-color: #fff;
+        height: 3.1rem;
+        box-shadow: 0 5px 6px 0 rgb(0 0 0 / 10%);
+    }
+    .feed-navbar{
+        height: inherit;
+        display: flex;
+        justify-content: space-between;
+    }
+    .feed-navbar__items{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        margin-right: 6.7rem;
+        padding: 0;
+    }
+    .feed-navbar__item{
+        height: 100%;
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+    .sub_menu_logo{
+        height:1rem;
+    }
+    .feed-navbar__item a{
+        text-decoration: none;
+    }
+    .feed-navbar__item__description div{
+        display: flex;
+        align-items: center;
+    }
+    .feed-navbar__item__description img,
+    .feed-navbar__item__description span{
+        font-size: 1.1rem;
+        padding-left: 0.2rem;
+    }
+    .feed-navbar__item__description p{
+        margin: 0;
+    }
+    .title{
+        display: flex;
+        justify-content: space-between;
+        padding: 0.4rem 0;
+    }
+    .title-description{
+        align-items: center;
+    }
+    .title-description div{
+        font-size: 1.1rem;
+    }
+    .accessibility-btn{
+        margin: 5px 0;
+        height: 2.5rem;
+        background-color: #002f75;
+        width: 6.25rem;
+        border-radius: 3px;
+        color: #fff;
+        padding: 0;
+    }
+    .accessibility-btn span{
+        color: #fff;
+        background-color: #002f75;
+        font-size: 30px;
+        vertical-align: middle;
+    }
+    .accessibility-btn i{
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .search-wrapper{
+        display: block;
+        margin-top: 1.1rem;
+        border-radius: 0.25rem;
+        width: 100%;
+        padding: 1.25rem;
+        background-color: #fff;
+        box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
+    }
+    .search-realestate__subtitle{
+        font-weight: 500;
+        margin: 0 0 1.9rem 0;
+    }
+    .search-realestate__subtitle span{
+        color: #ff7100;
+        border-bottom: 2px dotted #ff7100;
+    }
+    .form-search__realestate__columns{
+        display: grid;
+        grid-template-columns: 5fr 4fr 3fr 5fr 3fr 2fr;
+    }
+    .search-column{
+        display : flex;
+        flex-direction: column;
+        margin: 0 5px;
+    }
+    .search-column input{
+        color: #999;
+        border: 1px solid #ccc;
+        border-radius: 1px;
+        height: 1.1rem;
+        padding: 0.6rem;
+    }
+    .search-column__button{
+        align-self: end;
+    }
+    .search-column__button button{
+        height: 2.423rem;
+    }
+    .search-advanced{
+        background-color: #eee;
+    }
+    .search-again{
+        background-color: #ff7100;
+    }
+    .field-drop__button{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        height: 2.423rem;
+        border: 1px solid #ccc;
+    }
+    .feed-options{
+        margin-top: 5rem;
+        padding-left: 10rem;
+        display: flex;
+        justify-content:space-between;
+    }
+    .feed-options button{
+        height: 2rem;
+        border: 1px solid #dbdbdb;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+    .feed-options span{
+        vertical-align: middle;
+    }
+    .feed-options i{
+        color: black;
+    }
+    .showADS-mobile,
+    .sortBy-mobile{
+        display: none;
+    }
+    .showADS,
+    .sortBy{
+        display: block;
+    }
+    .sortBy button{
+        width: 10.5rem;
+        text-align: right;
+    }
+    .sortBy span{
+        text-align: left;
+    }
+    .feed-lists{
+        margin-top: 1.5rem;
+        width: 50rem;
+    }
+    .feed-list__item{
+        padding: 0;
+    }
+    .feed-list__item:hover{
+        box-shadow: 1.5px 1.5px 10px 2px rgb(220 218 218 / 50%);
+    }
+    .location-asset{
+        width: 23.5rem;
+        border-left: 1px solid rgba(0,0,0,.1);
+    }
+    .image-container img{
+        width: 6.9rem;
+        height: 4.13rem;
+        padding: 0.63rem;
+    }
+    .location-asset__description{
+        width: 100%;
+    }
+    .partial-detail__asset{
+        width: 14.5rem;
+        position: unset;
+        border-left: 1px solid rgba(0,0,0,.1);
+        border-top: none;
+        justify-content: space-evenly;
+    }
+    .partial-detail__asset__data div{
+        font-size: 1rem;
+    }
+    .asset-price{
+        width: 12rem;
+        position: unset;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-bottom: 1rem;
+    }
+    .material-icon__asset-price{
+        display: inline-block;
+    }
+    .asset-price span{
+        padding: 3px 0 4px 7px;
+    }
+    .asset-price__data{
+        padding-left: 1rem;
+    }
+
+
+}
