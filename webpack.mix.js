@@ -11,10 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
- mix.styles([
+ mix.scripts([
+    'resources/js/connection.js',
+    'resources/js/realestate.js',
+    'resources/js/mobileContent.js',
+    'resources/js/app.js'
+], 'public/js/all.js')
+    .styles([
     'resources/css/yad2.css',
     'resources/css/app.css',
     'resources/css/add_post.css',
     'resources/css/publish.css',
-    'resources/css/login.css'
+    'resources/css/mobile_content.css',
+    'resources/css/connection.css'
 ], 'public/css/all.css');

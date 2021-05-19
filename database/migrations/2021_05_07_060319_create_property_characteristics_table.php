@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePropertyConditionsTable extends Migration
+class CreatePropertyCharacteristicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePropertyConditionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_conditions', function (Blueprint $table) {
+        Schema::create('property_characteristics', function (Blueprint $table) {
             $table->id();
-            // $table->bigInteger('property_descriptions_id')->unsigned();
+            $table->bigInteger('property_list_id')->unsigned();
             $table->boolean('air_conditioning')->default(false);
             $table->boolean('bars')->default(false);
             $table->boolean('elevators')->default(false);
@@ -28,7 +28,7 @@ class CreatePropertyConditionsTable extends Migration
             $table->boolean('tadiran_air_conditioner')->default(false);
             $table->boolean('Furniture')->default(false);
             $table->timestamps();
-            // $table->foreign('property_descriptions_id')->references('id')->on('property_descriptions')->onDelete('cascade');
+            $table->foreign('property_list_id')->references('id')->on('property_lists')->onDelete('cascade');
         });
     }
 
@@ -39,6 +39,6 @@ class CreatePropertyConditionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('property_conditions');
+        Schema::dropIfExists('property_characteristics');
     }
 }
