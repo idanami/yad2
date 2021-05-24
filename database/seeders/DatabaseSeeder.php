@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // $this->call(ContactSeeder::class);
+        $this->call(PropertyListSeeder::class);
+        // $this->call(PropertyCharacteristicsSeeder::class);
+        // $this->call(AboutPropertySeeder::class);
+        // $this->call(GeneralDescriptionOfPropertySeeder::class);
     }
 }

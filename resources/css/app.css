@@ -33,9 +33,38 @@ p,h3,dd,h1,h2,h3,h4,h5,h6{
     margin: 0;
 }
 ul{
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 input[type="checkbox"]
 {
     vertical-align: bottom;
+}
+.w-5{
+    display: none;
+}
+.my-active span{
+    display: inline-block;
+    padding: 5px 14px;
+    background: brown;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+.pager{
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+}
+.pager li{
+    display: inline;
+}
+.pager li a{
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    color: #337ab7;
+    text-decoration: none;
 }

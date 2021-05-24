@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Reset\PasswordReset;
+use App\Http\Controllers\checkAdvancedExist;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Register;
 use App\Models\PropertyList;
@@ -30,12 +31,20 @@ Route::get('/publish', function (){
     return view('publish.publish');
 });
 
-Route::get('/realestate',[Home::class,'realestate']);
+Route::get('/realestate',[Home::class,'realestate'])->name('realestate');
+
+Route::get('/test',[Home::class,'test'])->name('test');
+
+// Route::get('/realestate/{data}',[Home::class,'realestateForelse'])->name('home.realestate.test');
+Route::post('/realestate/{id}',[Home::class,'realestateForelse'])->name('home.realestate');
+
 Route::post('/mobile_content',[Home::class,'mobileContent']);
+
+Route::get('/check_advanced',[checkAdvancedExist::class,'checkAdvancedExist'])->name('checkAdvanced');
 
 Route::post('/register',[RegisterController::class,'register_process']);
 Route::post('/login',[LoginController::class,'login_process']);
-Route::post('/test',[Register::class,'index']);
+// Route::post('/test',[Register::class,'index']);
 // Route::post('reset_password_without_token', [PasswordReset::class,'validatePasswordRequest']);
 Route::get('send-verification_code', [PasswordReset::class,'validatePasswordRequest'])->name('sendVarificationCode');
 Route::get('check_token', [PasswordReset::class,'confirmToken'])->name('confirmToken');

@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title') - page</title>
-    <link href="/css/all.css" rel="stylesheet">
-    {{-- <link href="http://yad2//css/all.css" rel="stylesheet"> --}}
+    {{-- <link href="/css/all.css" rel="stylesheet"> --}}
+    <link href="http://yad2//css/all.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.19/ua-parser.min.js"></script>
     <script src="{{ mix('/js/all.js') }}"></script>
+    @routes
 </head>
 <body>
     <div class="background"></div>
@@ -182,37 +185,38 @@
                                         <label for="lastname">שם משפחה</label>
                                         <input type="text" id="lastname" name="lastname" placeholder="6 תווים, אותיות באנגלית וספרה" onkeyup="validate(2)">
                                     </div>
-                                    <div class="popupContent-login__input__text">
-                                        <div>
-                                            <label for="phoneNumber">מספר טלפון</label>
+                                    <div id="areaCode-contents" class="popupContent-login__input__text">
+                                        <label for="phoneNumber">מספר טלפון</label>
+                                        <div class="areaCode-content">
                                             <input type="text" id="phoneNumber" name="phoneNumber" placeholder="טלפון" onkeyup="validate(2)">
+                                            <button class="areaCode-btn">
+                                                <i style="color: black;">קידומת</i>
+                                                <span class="material-icons">expand_more</span>
+                                                <div class="croll-num__selects">
+                                                    <div>050</div>
+                                                    <div>051</div>
+                                                    <div>052</div>
+                                                    <div>053</div>
+                                                    <div>054</div>
+                                                    <div>055</div>
+                                                    <div>058</div>
+                                                    <div>נקה</div>
+                                                </div>
+                                            </button>
                                         </div>
-                                        <button class="expand_moreOrexpand_less">
-                                            <span class="material-icons">expand_more</span>
-                                            <div class="scroll-num__select">
-                                                <div>050</div>
-                                                <div>051</div>
-                                                <div>052</div>
-                                                <div>053</div>
-                                                <div>054</div>
-                                                <div>055</div>
-                                                <div>058</div>
-                                                <div>נקה</div>
-                                            </div>
-                                        </button>
+                                    </div>
+                                    <div class="popupContent-login__input__text" style="width: 70%;">
+                                        <label for="dateOfBirth">תאריך לידה</label>
+                                        <input type="date" id="dateOfBirth"  name="dateOfBirth" placeholder="בחר תאריך לידה" onblur="validate(2)">
                                     </div>
                                     <div class="popupContent-login__input__text">
-                                        <div>
-                                            <label for="dateOfBirth">תאריך לידה</label>
-                                            <input type="date" id="dateOfBirth"  name="dateOfBirth" placeholder="בחר תאריך לידה" onblur="validate(2)">
-                                        </div>
-                                        <div>
-                                            <label for="AOR">קראתי ומאשר את <a href="">תקנון</a> האתר</label>
+                                        <div class="popupContent-register-content">
                                             <input type="checkbox" id="ApOfRe"  name="AOR" onchange="approvalOfRegulations(this)">
+                                            <label for="AOR">קראתי ומאשר את <a href="">תקנון</a> האתר</label>
                                         </div>
-                                        <div>
-                                            <label for="RM">מאשר קבלת דיוור פרסומי כללי מיד2</label>
+                                        <div class="popupContent-register-content">
                                             <input type="checkbox" id="RM"  name="dateOfBirth">
+                                            <label for="RM">מאשר קבלת דיוור פרסומי כללי מיד2</label>
                                         </div>
                                     </div>
                             </div>

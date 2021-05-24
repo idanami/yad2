@@ -15,9 +15,9 @@ class PropertyList extends Model
         return $this->belongsTo(Contact::class);
     }
 
-    public function contacts(){
-        return $this->hasMany(Contact::class);
-    }
+    // public function contacts(){
+    //     return $this->hasMany(Contact::class);
+    // }
     public function image(){
         return $this->hasMany(Image::class);
     }

@@ -498,9 +498,7 @@
         </section>
         {{-- @if(count($property_lists)) --}}
         {{-- <div class="pagination-wrapper"> --}}
-                {{$property_lists->links("pagination.custom")}}
-{{--                 {{$property_lists->links("pagination::bootstrap-4")}}
- --}}
+                {{$property_lists->links("pagination.custom_pag")}}
             {{-- </div> --}}
         {{-- @endif --}}
         {{-- @if(Session::has('property_lists'))

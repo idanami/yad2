@@ -15,6 +15,4 @@ class Contact extends Model
         return $this->hasMany(PropertyList::class);
     }
 
-
-   
 }

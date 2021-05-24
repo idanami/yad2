@@ -81,9 +81,6 @@
     background-color: #fff;
     border-radius: 2px;
 }
-.feed-lists{
-    margin-top: 2rem;
-}
 .feed-list__item{
     display: flex;
     position: relative;
@@ -270,7 +267,7 @@
     }
     .form-search__realestate__columns{
         display: grid;
-        grid-template-columns: 5fr 4fr 3fr 5fr 3fr 2fr;
+        grid-template-columns: 7fr 5fr 4fr 6fr 4fr 3fr;
     }
     .search-column{
         position: static;
@@ -292,6 +289,7 @@
         height: 2.423rem;
     }
     .allTypes-ofAssets{
+        z-index: 5;
         position: absolute;
         width: -webkit-fill-available;
         background-color: #fff;
@@ -317,6 +315,7 @@
         background-color: #eee;
     }
     .dropdown-content__search{
+        display: none;
         position: absolute;
         top: 100%;
         right: 0;
@@ -330,8 +329,10 @@
     .advanced-search__content{
         margin: 1.875rem 2.5rem 0;
     }
+    .advanced-search__content ul{
+        padding: 1rem;
+    }
     .advanced-search__apartment-characteristics{
-        list-style: none;
         display: grid;
         grid-template-columns: repeat(5 , 1fr);
         border-bottom: 1px solid #ccc;
@@ -341,10 +342,10 @@
         align-items: center;
     }
     .advanced-search__descriptions{
-        list-style: none;
         display: grid;
         grid-template-columns: 5fr 5fr 3fr 3fr;
         column-gap: 0.6rem;
+        border-bottom: 1px solid #ccc;
     }
     .advanced-search__description-input{
         display: inline-flex;
@@ -353,9 +354,8 @@
         width: 100%;
     }
     .free-search{
-        width: 60%;
-        list-style: none;
         display: flex;
+        border-bottom: 1px solid #ccc;
     }
     .free-search__item-input,
     .free-search__item{
@@ -365,6 +365,12 @@
         display: flex;
         align-items: center;
         margin-right: 1rem;
+    }
+    .searrchOrClean{
+        display: flex;
+        justify-content: space-between;
+        width: 50%;
+        float: left;
     }
     .search-again{
         background-color: #ff7100;
@@ -401,6 +407,7 @@
     .showADS,
     .sortBy{
         display: block;
+        position: relative;
     }
     .sortBy button{
         width: 10.5rem;
@@ -409,8 +416,20 @@
     .sortBy span{
         text-align: left;
     }
+    .feed-filter___dropdowm{
+        display: block;
+        position: absolute;
+        z-index: 5;
+        background: #fff;
+        padding: 0.75rem 1.1rem;
+        top: 3rem;
+        transform: translateX(-15%);
+    }
+    .feed-filter__dropdown__list{
+        margin: 0.7rem;
+    }
     .feed-lists{
-        margin-top: 1.5rem;
+        margin: 0;
         width: 50rem;
     }
     .feed-list__item{
@@ -498,6 +517,10 @@
     .including-list{
         display: flex;
         padding: 5px 5px 15px 10px;
+        align-items: center;
+    }
+    .including-list__info{
+        margin-right: 0.3rem;
     }
 }
 @media (min-width: 74.5rem) {
@@ -542,11 +565,40 @@ p,h3,dd,h1,h2,h3,h4,h5,h6{
     margin: 0;
 }
 ul{
+    list-style: none;
     padding: 0;
+    margin: 0;
 }
 input[type="checkbox"]
 {
     vertical-align: bottom;
+}
+.w-5{
+    display: none;
+}
+.my-active span{
+    display: inline-block;
+    padding: 5px 14px;
+    background: brown;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+.pager{
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+}
+.pager li{
+    display: inline;
+}
+.pager li a{
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    color: #337ab7;
+    text-decoration: none;
 }
 
 
@@ -843,6 +895,24 @@ input[type="checkbox"]
     display: flex;
     flex-direction: column;
 }
+.popupContent-login__input__text label{
+    padding: 0.2rem;
+}
+.areaCode-content{
+    display: flex;
+}
+.areaCode-btn{
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    display: flex;
+    align-items: center;
+}
+/* #areaCode-contents{
+} */
+.popupContent-register-content input{
+    height: auto !important;
+
+}
 .popupContent-login__password{
     position: relative;
 }
@@ -872,13 +942,19 @@ input[type="checkbox"]
     font-weight: 300;
     border-radius: 4px;
 }
+.areaCode-btn{
+
+}
 .aConnection{
     color: #ff7100;
 }
 
 .send-for__review,
 .change-password,
-.password-reset__popupContent,
-.register-popupContent{
+.login-popupContent,
+.croll-num__selects,
+.popupContent-register__part1,
+/* .register-popupContent, */
+.password-reset__popupContent{
     display: none;
 }
