@@ -1,12 +1,11 @@
 
 $(document).ready(function(){
     $('.feed-list__item').click(function(){
-        // var index_content = $(this).attr('value');
+        var index_content = $(this).attr('value');
         var index_parent = $(this).parent().index();
-
         var ua = new UAParser();
         var result = ua.getResult();
-        $('#propertyListIdMobile').attr('value',index_parent)
+        $('#propertyListIdMobile').attr('value',index_content)
         if(result.device.type == "mobile")
             $('#property_list_id').submit()
         else{
@@ -22,27 +21,28 @@ $(document).ready(function(){
                     }
                 })
             }
-            else
-                $feed_list_content.css('display','none')
-             // $('.feed-lists__content').each(function(){
-            //     if($(this).attr('id') == 'feed-lists__content'+index_content){
-            //         if($(this).css("display") == 'none'){
-            //             $(this).css("display","flex")
-            //             $( ".including-list" ).each(function(){
-            //                 var this_index = $(this).index();
-            //                 var this_value = $(this).attr('value');
-            //                 alert(this_index)
-            //                 if(this_value == 0){
-            //                     $( ".including-list" ).eq(this_index).css('color','#b6b6b6')
-            //                     $( ".including-list span" ).eq(this_index).css('color','#b6b6b6')
-            //                 }
-            //             });
-            //         }
-            //         else
-            //             $(this).css("display","none")
-            //     }
-            // })
+            else    $feed_list_content.css('display','none')
         }
+    })
+    $('.feed-list__item')
+    .mouseover(function(){
+        let this_value = $(this).attr('value');
+        $('.image-container__numImage').eq(this_value).css('display','block');
+
+        // alert(this_value)
+        // $.ajax({
+        //     type:'get',
+        //     url:"allImageById",
+        //     data:{'id':this_value},
+        //     success:function(data){
+        //         $('.image-container__numImage').eq(this_value).css('display','block');
+        //         $('.image-container__currentNumber').text(data+'+');
+        //     },
+        // });
+    })
+    .mouseleave(function(){
+        let this_value = $(this).attr('value')
+        $('.image-container__numImage').eq(this_value).css('display','none');
     })
 
 })

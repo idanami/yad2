@@ -24,11 +24,11 @@ class GeneralDescriptionOfPropertyFactory extends Factory
         return [
             // 'property_list_id' =>  $this->faker->numberBetween($min = 1, $max = 15),
             'property_list_id' => \App\Models\PropertyList::factory(),
-            'general_description' => $this->faker->realText($maxNbChars = 50, $indexSize = 2),
-            'property_condition' => $this->faker->realText($maxNbChars = 20, $indexSize = 2),
-            'total_floors_in_the_building' => $this->faker->numberBetween($min = 1, $max = 8),
+            'general_description' => $this->faker->realText($maxNbChars = 250, $indexSize = 2),
+            'property_condition' => $this->faker->realText($maxNbChars = 12, $indexSize = 2),
+            'total_floors_in_the_building' => $this->faker->numberBetween($min = 1, $max = 50),
             'parking' => $this->faker->numberBetween($min = 1, $max = 3),
-            'entry_date' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years'),
+            'entry_date' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years')->format("Y-m-d"),
             'balconies' => $this->faker->numberBetween($min = 1, $max = 3),
         ];
     }

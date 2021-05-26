@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title') - page</title>
-    {{-- <link href="/css/all.css" rel="stylesheet"> --}}
-    <link href="http://yad2//css/all.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
+    {{-- <link href="http://yad2//css/all.css" rel="stylesheet"> --}}
     {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -17,7 +17,7 @@
 <body>
     <div class="background"></div>
 
-<main class="py-4">
+<main>
     <section class="popUpWindow" style="display: none;">
         <div class="close-popUpWindow" style="cursor: pointer;">x</div>
         <div class="popupContent">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div class="popupContent-inner__wrapper">
-                    <form action="register" method="POST" class="popupContent-form" enctype="multipart/form-data">
+                    <form action="register" method="POST" class="popupContent-form register-form" enctype="multipart/form-data">
                         @csrf
                         <div class="header-login">
                             <h3>הרשמה</h3>
@@ -190,17 +190,21 @@
                                         <div class="areaCode-content">
                                             <input type="text" id="phoneNumber" name="phoneNumber" placeholder="טלפון" onkeyup="validate(2)">
                                             <button class="areaCode-btn">
-                                                <i style="color: black;">קידומת</i>
-                                                <span class="material-icons">expand_more</span>
+                                                <div class="areaCode-div">
+                                                    <i class="areaCodeValue" style="color: black;">קידומת</i>
+                                                    <span class="material-icons areaCode-icon">expand_more</span>
+                                                </div>
                                                 <div class="croll-num__selects">
-                                                    <div>050</div>
-                                                    <div>051</div>
-                                                    <div>052</div>
-                                                    <div>053</div>
-                                                    <div>054</div>
-                                                    <div>055</div>
-                                                    <div>058</div>
-                                                    <div>נקה</div>
+                                                    <div class="croll-number">
+                                                        <div>050</div>
+                                                        <div>051</div>
+                                                        <div>052</div>
+                                                        <div>053</div>
+                                                        <div>054</div>
+                                                        <div>055</div>
+                                                        <div>058</div>
+                                                    </div>
+                                                    <div class="m-clean">נקה</div>
                                                 </div>
                                             </button>
                                         </div>

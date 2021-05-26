@@ -97,6 +97,12 @@
     margin-top: 1rem;
     width: 100%;
     padding: 0.5rem;
+    overflow: hidden;
+}
+.location-asset__description div{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .partial-detail__asset{
     position: absolute;
@@ -444,10 +450,26 @@
     }
     .image-container{
         margin: auto 0.6rem;
+        position: relative;
     }
     .image-container img{
         width: 6.9rem;
         height: 4.13rem;
+    }
+    .image-container__numImage span{
+        background: #fff;
+        position: absolute;
+    }
+    .image-container__currentNumber{
+        position: absolute;
+        font-weight: bold;
+        z-index: 3;
+    }
+    .image-container__numImage span,
+    .image-container__currentNumber{
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%);
     }
     .partial-detail__asset{
         width: 14.5rem;
@@ -851,14 +873,22 @@ input[type="checkbox"]
     display: flex;
 }
 .popupContent-welcome{
+    width: 18.1rem;
     padding: 1.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: linear-gradient(229.5deg,#fa0,#ff7100);
 }
-.popupContent-welcome h1{
+.popupContent-welcome h1,
+.popupContent-welcome h4
+{
     color: #fff;
+    line-height: 1;
+    font-size: 2.6rem;
 }
 .popupContent-welcome h4{
-    color: #fff;
+    font-size: 1.2rem;
 }
 .couch-lamp__img img{
     width: 14.15rem;
@@ -905,10 +935,43 @@ input[type="checkbox"]
     border: 1px solid #ccc;
     border-radius: 4px 0 0 4px;
     display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.areaCode-div{
+    height: 100%;
+    display: flex;
     align-items: center;
 }
-/* #areaCode-contents{
-} */
+.croll-num__selects{
+    width: 90%;
+    position: absolute;
+    top: 115%;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    font-size: 1rem;
+    left: 0;
+    background-color: #fff;
+}
+.croll-number{
+    overflow-y: scroll;
+    height: 12.5rem;
+}
+.croll-number div{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.m-clean{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    border-top: 1px solid #ccc;
+}
 .popupContent-register-content input{
     height: auto !important;
 
@@ -934,6 +997,10 @@ input[type="checkbox"]
     background-color: #eee;
     border-color: #ccc;
 }
+.registerOrlogin{
+    text-align: center;
+    padding-bottom: 1rem;
+}
 .popupContent-form input{
     height: 2.5rem;
     padding: 0 0.9rem;
@@ -942,19 +1009,17 @@ input[type="checkbox"]
     font-weight: 300;
     border-radius: 4px;
 }
-.areaCode-btn{
 
-}
 .aConnection{
     color: #ff7100;
 }
 
 .send-for__review,
 .change-password,
-.login-popupContent,
+/* .login-popupContent, */
 .croll-num__selects,
-.popupContent-register__part1,
-/* .register-popupContent, */
+.popupContent-register__part2,
+.register-popupContent,
 .password-reset__popupContent{
     display: none;
 }

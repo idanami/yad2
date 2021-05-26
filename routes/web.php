@@ -5,8 +5,6 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Reset\PasswordReset;
 use App\Http\Controllers\checkAdvancedExist;
 use App\Http\Controllers\Home;
-use App\Http\Controllers\Register;
-use App\Models\PropertyList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,21 +30,16 @@ Route::get('/publish', function (){
 });
 
 Route::get('/realestate',[Home::class,'realestate'])->name('realestate');
-
-Route::get('/test',[Home::class,'test'])->name('test');
-
-// Route::get('/realestate/{data}',[Home::class,'realestateForelse'])->name('home.realestate.test');
-Route::post('/realestate/{id}',[Home::class,'realestateForelse'])->name('home.realestate');
-
 Route::post('/mobile_content',[Home::class,'mobileContent']);
-
 Route::get('/check_advanced',[checkAdvancedExist::class,'checkAdvancedExist'])->name('checkAdvanced');
+Route::get('/allImageById',[checkAdvancedExist::class,'checkImageExist'])->name('imageById');
+
 
 Route::post('/register',[RegisterController::class,'register_process']);
 Route::post('/login',[LoginController::class,'login_process']);
-// Route::post('/test',[Register::class,'index']);
-// Route::post('reset_password_without_token', [PasswordReset::class,'validatePasswordRequest']);
-Route::get('send-verification_code', [PasswordReset::class,'validatePasswordRequest'])->name('sendVarificationCode');
+
+
+Route::get('send_verification_code', [PasswordReset::class,'validatePasswordRequest']);
 Route::get('check_token', [PasswordReset::class,'confirmToken'])->name('confirmToken');
 Route::post('enter_new_pass', [PasswordReset::class,'changePassword']);
 

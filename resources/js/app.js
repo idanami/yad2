@@ -2,7 +2,6 @@
 $(document).ready(function(){
 
     $('button').click(function(event) {
-
         var spanCheck = $(this).children('span').text();
         var divCheck = $(this).children('div').text();
         var iCheck = $(this).children('i').text();
@@ -37,43 +36,6 @@ $(document).ready(function(){
         }
         if(iCheck == 'חיפוש'){
             $("#searchInPage").submit();}
-            // let city = $("#city").val();
-            // let max_price = $("#max_price").val();
-            // let min_price = $("#min_price").val();
-            // let pandor_doors = $("#pandor_doors").val();
-            // let elevators = $("#elevators").val();
-            // let air_conditioning = $("#air_conditioning").val();
-            // let mamad = $("#mamad").val();
-            // let bars = $("#bars").val();
-            // let access_for_disabled = $("#access_for_disabled").val();
-            // let renovated = $("#renovated").val();
-            // let Furniture = $("#Furniture").val();
-            // let floor_min = $("#floor_min").val();
-            // let floor_max = $("#floor_max").val();
-            // let size_min = $("#size_min").val();
-            // let size_max = $("#size_max").val();
-            // let entry_date = $("#entry_date").val();
-            // let free_search = $("#free_search").val();
-            // alert("asfgd")
-            // $.ajax({
-                // type:"GET",
-                // url: "check_advanced",
-                // data:{
-                    // 'city':city ,
-                    // 'max_price':max_price ,'min_price':min_price ,'pandor_doors':pandor_doors,'elevators':elevators ,
-                    // 'air_conditioning':air_conditioning ,'mamad':mamad ,'bars':bars ,'access_for_disabled':access_for_disabled ,
-                    // 'renovated':renovated ,'Furniture':Furniture ,'floor_min':floor_min ,'floor_max':floor_max ,'size_min':size_min ,
-                    // 'size_max':size_max ,'entry_date':entry_date ,'free_search':free_search ,
-                // },
-                // success:function(data){
-                    // alert(data)
-                    // {{ $property_lists = data }}
-                    // $('#propertyListIdMobile').attr('value',data)
-                    // window.location.href=route('home.realestate',data)
-                // },
-            // })
-            // window.location.href=route('home.realestate','id' , $('#propertyListIdMobile').val());
-        // }
     })
 })
 

@@ -16,7 +16,7 @@ class PasswordReset extends Controller
     public function validatePasswordRequest(Request $request)
     {
         $email = $request->email;
-
+        // return $email;
         // You can add validation login here
         $user = User::whereEmail($email)->first();
 
@@ -36,7 +36,7 @@ class PasswordReset extends Controller
                 ]);
             }
 
-        }else return redirect()->back()->withErrors(['email' => trans('User does not exist')]);
+        }else return back()->withErrors(['email' => trans('User does not exist')]);
 
         //Get the token just created above
         $tokenData = DB::table('password_resets')->where('email', $email)->first();
@@ -56,7 +56,6 @@ class PasswordReset extends Controller
         return false;
     }
     public function changePassword(Request $request){
-
         DB::table('users')->whereEmail($request->email_for_change_pass)->update(['password' => $request->newPassword]);
         return view('publish.publish');
     }

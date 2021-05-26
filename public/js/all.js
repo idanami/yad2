@@ -116,12 +116,20 @@ function checkEmail(object){
 }
 
 $(document).ready(function(){
+    $('#btn-create__acount').click(function(){
+        $('.register-form').submit();
+    })
+    $('#btn-new__password').click(function(){
+        $('.change-password').submit()
+    })
     $(".connected-link").click(function(){
         $(".popUpWindow").css("display","block")
     })
     $(".close-popUpWindow").click(function(){
         $(".popUpWindow").css("display","none")
-    })
+        $(".login-popupContent").css("display","flex")
+        $(".register-popupContent").css("display","none")
+        $(".password-reset__popupContent").css("display","none")    })
     $( "#btn-continued__register" ).click(function() {
         $(".popupContent-register__part1").css("display","none")
         $(".popupContent-register__part2").css("display","block")
@@ -129,7 +137,6 @@ $(document).ready(function(){
     $("#toRegister").click(function(){
         $(".login-popupContent").css("display","none")
         $(".register-popupContent").css("display","flex")
-        $(".popupContent-register__part2").css("display","none")
     })
     $("#toConnection").click(function(){
         $(".login-popupContent").css("display","flex")
@@ -139,13 +146,30 @@ $(document).ready(function(){
         $(".login-popupContent").css("display","none")
         $(".password-reset__popupContent").css("display","flex")
     })
+    $('.areaCode-btn').click(function(){
+        if($('.areaCode-icon').text() == 'expand_more'){
+            $('.areaCode-icon').text('expand_less')
+            $('.croll-num__selects').css('display', 'block');
+        }else{
+            $('.areaCode-icon').text('expand_more')
+            $('.croll-num__selects').css('display', 'none');
+        }
+    })
+    $('.croll-number div').click(function(){
+        let areaCode = $(this).text();
+        $('.areaCodeValue').text(areaCode)
+    })
+    $('.m-clean').click(function(){
+        $('.areaCodeValue').text('קידומת')
+    })
     $("#btn-check__emailIfExsist").click(function(){
         var email_check=$('#email-reseet_pass').val();
         $.ajax({
             type:'get',
-            url:"{{ route('sendVarificationCode') }}",
+            url:"send_verification_code",
             data:{'email':email_check},
             success:function(data){
+                alert(data)
                 if(data){
                     $(".send-mail__forAuth").css("display","none");
                     $(".send-for__review").css("display","flex");
@@ -165,7 +189,7 @@ $(document).ready(function(){
         var emailCheck__token = $("#email_for_change_pass").val();
         $.ajax({
             type:'get',
-            url:"{{ route('confirmToken') }}",
+            url:"check_token",
             data:{'token__confirm':token__confirm , 'email':emailCheck__token},
             success:function(data){
                 if(data){
@@ -184,12 +208,11 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('.feed-list__item').click(function(){
-        // var index_content = $(this).attr('value');
+        var index_content = $(this).attr('value');
         var index_parent = $(this).parent().index();
-
         var ua = new UAParser();
         var result = ua.getResult();
-        $('#propertyListIdMobile').attr('value',index_parent)
+        $('#propertyListIdMobile').attr('value',index_content)
         if(result.device.type == "mobile")
             $('#property_list_id').submit()
         else{
@@ -205,27 +228,25 @@ $(document).ready(function(){
                     }
                 })
             }
-            else
-                $feed_list_content.css('display','none')
-             // $('.feed-lists__content').each(function(){
-            //     if($(this).attr('id') == 'feed-lists__content'+index_content){
-            //         if($(this).css("display") == 'none'){
-            //             $(this).css("display","flex")
-            //             $( ".including-list" ).each(function(){
-            //                 var this_index = $(this).index();
-            //                 var this_value = $(this).attr('value');
-            //                 alert(this_index)
-            //                 if(this_value == 0){
-            //                     $( ".including-list" ).eq(this_index).css('color','#b6b6b6')
-            //                     $( ".including-list span" ).eq(this_index).css('color','#b6b6b6')
-            //                 }
-            //             });
-            //         }
-            //         else
-            //             $(this).css("display","none")
-            //     }
-            // })
+            else    $feed_list_content.css('display','none')
         }
+    })
+    $('.feed-list__item')
+    .mouseover(function(){
+        let this_value = $(this).attr('value');
+        $('.image-container__numImage').eq(this_value-1).css('display','block');
+        $.ajax({
+            type:'get',
+            url:"allImageById",
+            data:{'id':this_value},
+            success:function(data){
+                $('.image-container__currentNumber').text(data+'+');
+            },
+        });
+    })
+    .mouseleave(function(){
+        let this_value = $(this).attr('value')
+        $('.image-container__numImage').eq(this_value-1).css('display','none');
     })
 
 })
@@ -260,7 +281,6 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('button').click(function(event) {
-
         var spanCheck = $(this).children('span').text();
         var divCheck = $(this).children('div').text();
         var iCheck = $(this).children('i').text();
@@ -295,43 +315,6 @@ $(document).ready(function(){
         }
         if(iCheck == 'חיפוש'){
             $("#searchInPage").submit();}
-            // let city = $("#city").val();
-            // let max_price = $("#max_price").val();
-            // let min_price = $("#min_price").val();
-            // let pandor_doors = $("#pandor_doors").val();
-            // let elevators = $("#elevators").val();
-            // let air_conditioning = $("#air_conditioning").val();
-            // let mamad = $("#mamad").val();
-            // let bars = $("#bars").val();
-            // let access_for_disabled = $("#access_for_disabled").val();
-            // let renovated = $("#renovated").val();
-            // let Furniture = $("#Furniture").val();
-            // let floor_min = $("#floor_min").val();
-            // let floor_max = $("#floor_max").val();
-            // let size_min = $("#size_min").val();
-            // let size_max = $("#size_max").val();
-            // let entry_date = $("#entry_date").val();
-            // let free_search = $("#free_search").val();
-            // alert("asfgd")
-            // $.ajax({
-                // type:"GET",
-                // url: "check_advanced",
-                // data:{
-                    // 'city':city ,
-                    // 'max_price':max_price ,'min_price':min_price ,'pandor_doors':pandor_doors,'elevators':elevators ,
-                    // 'air_conditioning':air_conditioning ,'mamad':mamad ,'bars':bars ,'access_for_disabled':access_for_disabled ,
-                    // 'renovated':renovated ,'Furniture':Furniture ,'floor_min':floor_min ,'floor_max':floor_max ,'size_min':size_min ,
-                    // 'size_max':size_max ,'entry_date':entry_date ,'free_search':free_search ,
-                // },
-                // success:function(data){
-                    // alert(data)
-                    // {{ $property_lists = data }}
-                    // $('#propertyListIdMobile').attr('value',data)
-                    // window.location.href=route('home.realestate',data)
-                // },
-            // })
-            // window.location.href=route('home.realestate','id' , $('#propertyListIdMobile').val());
-        // }
     })
 })
 

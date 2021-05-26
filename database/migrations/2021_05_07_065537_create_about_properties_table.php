@@ -19,9 +19,9 @@ class CreateAboutPropertiesTable extends Migration
             $table->string("city");
             $table->string("settlement")->nullable();
             $table->string("street");
-            $table->string("house_number");
+            $table->integer("house_number");
             $table->string("property_type");
-            $table->string("rooms_number");
+            $table->integer("rooms_number");
             $table->integer("floor_number");
             $table->integer("square_meter");
             $table->integer("price");

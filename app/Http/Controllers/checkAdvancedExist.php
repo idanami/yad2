@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contact;
+use App\Models\Image;
 use App\Models\PropertyList;
-use Facade\FlareClient\Http\Response;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class checkAdvancedExist extends Controller
 {
@@ -16,27 +17,28 @@ class checkAdvancedExist extends Controller
     {
         // sql command
         $sql = "SELECT * FROM property_lists
-                JOIN property_characteristics ON property_characteristics.property_list_id = property_lists.id
-                JOIN about_properties ON about_properties.property_list_id = property_lists.id ";
+                LEFT JOIN property_characteristics ON property_characteristics.property_list_id = property_lists.id
+                LEFT JOIN general_description_of_properties ON general_description_of_properties.property_list_id = property_lists.id
+                LEFT JOIN about_properties ON about_properties.property_list_id = property_lists.id ";
 
         // field form db tables
         $tableField =   array(
                         'property_includes' => array('air_conditioning' , 'bars' , 'elevators' , 'access_for_disabled' , 'renovated', 'mamad' , 'Storage' , 'pandor_doors' , 'Furniture'),
                         'about_properties' => array('city','min_price','max_price','floor_min','floor_max','size_min','size_max'),
-                        // 'about_properties' => array('city','price','floor_number','square_meter'),
-                        'general_description_of_properties' => array('general_description','parking','entry_date','balconies')
+                        'general_description_of_properties' => array('free_search','parking','entry_date','balconies')
                         );
         $propertiesArray = array();
 
         $fieldPropertyIncludesSelectedArray = array();
         $fieldAboutPropertiesSelectedArray = array();
+        $fieldAboutGeneralDescriptionSelectedArray = array();
 
-        // Check field from from that not empty
+
+        //     checking all value from input   //
         foreach($tableField['property_includes'] as $index => $propertyList){
             if($request->$propertyList == 'on')
                 array_push($fieldPropertyIncludesSelectedArray , $propertyList);
         }
-
         foreach($tableField['about_properties'] as $index => $propertyList){
             if($request->$propertyList != ''){
                 $item = array($propertyList => $request->$propertyList);
@@ -50,17 +52,40 @@ class checkAdvancedExist extends Controller
                     array_push($fieldAboutPropertiesSelectedArray , $propertyList);
             }
         }
-        if(count($fieldPropertyIncludesSelectedArray) || count($fieldAboutPropertiesSelectedArray))
-            $sql .= "WHERE ";
+        foreach($tableField['general_description_of_properties'] as $index => $propertyList){
+            if($request->$propertyList == 'on')
+                array_push($fieldAboutGeneralDescriptionSelectedArray , $propertyList);
+            else if($request->$propertyList != '')
+                array_push($fieldAboutGeneralDescriptionSelectedArray , $propertyList);
+        }
 
-        foreach($fieldPropertyIncludesSelectedArray as $index => $field){
-            $sql .= $field." = 1 ";
+        //  if at least 1 from all value input not empty insert where to query command  //
+        if(count($fieldPropertyIncludesSelectedArray) || count($fieldAboutPropertiesSelectedArray) || count($fieldAboutGeneralDescriptionSelectedArray))
+            $sql .= "WHERE ";
+        // if at least 1 value input not empty compare value input with db value
+        foreach($fieldAboutGeneralDescriptionSelectedArray as  $index => $fieldSelected){
+            switch($fieldSelected){
+                case 'free_search': $sql .= "general_description = ".$request->$fieldSelected;
+                             break;
+                case 'parking': $sql .= "parking = 1 ";
+                             break;
+                case 'entry_date': $sql .= "entry_date = ".$request->entry_date;
+                             break;
+                case 'balconies': $sql .= "balconies = 1 ";
+                             break;
+            }
+            if((($index+1) != count($fieldAboutGeneralDescriptionSelectedArray)) || count($fieldAboutPropertiesSelectedArray) || count($fieldPropertyIncludesSelectedArray))
+                $sql .= " AND ";
+        }
+
+        foreach($fieldPropertyIncludesSelectedArray as $index => $fieldSelected){
+            $sql .= $fieldSelected." = 1 ";
             if((($index+1) != count($fieldPropertyIncludesSelectedArray)) || count($fieldAboutPropertiesSelectedArray))
                 $sql .= " AND ";
         }
         foreach($fieldAboutPropertiesSelectedArray as $index => $fieldSelected){
             switch($fieldSelected){
-                case 'city': $sql .= "city = '$request->$fieldSelected'";
+                case 'city': $sql .= "city = ".$request->$fieldSelected;
                              break;
                 case 'min_price': $sql .= "price > ".$request->$fieldSelected;
                              break;
@@ -79,20 +104,19 @@ class checkAdvancedExist extends Controller
                 $sql .= " AND ";
 
         }
-        $property_lists = DB::select($sql);
-        $selectedRows= array();
-        foreach($property_lists as $index => $stam){
-            array_push($selectedRows,$stam->id);
-        }
-        // return $sql;
+        $rowSelected = DB::select($sql);
 
-        if((count($fieldPropertyIncludesSelectedArray)) || (count($fieldAboutPropertiesSelectedArray)))
-            $property_lists = PropertyList::whereIn('id', $selectedRows)->paginate(50);
-        else
-            $property_lists = PropertyList::paginate(50);
-
-        // return back()->with('property_lists' , $property_lists);
-        return view('home.realestate' , ['property_lists' => $property_lists]);
-        // return view('home.realestate' , ['property_lists' => $property_lists]);
+        $checkAdvancedExist = new Controller;
+        $property_lists = $checkAdvancedExist->paginate($rowSelected);
+        $image = Image::all();
+        return view('home.realestate' , ['property_lists' => $property_lists],['image'=>$image]);
     }
+        public function checkImageExist(Request $request){
+
+            $property_lists =PropertyList::find($request->id);
+            $rowNumber= count($property_lists->image);
+            return $rowNumber;
+
+        }
+
 }

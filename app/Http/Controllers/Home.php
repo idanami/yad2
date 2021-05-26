@@ -2,54 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AboutProperty;
-use App\Models\Address;
-use App\Models\Contact;
-use App\Models\GeneralDescriptionOfProperty;
 use App\Models\Image;
-use App\Models\PropertyCharacteristics;
 use App\Models\PropertyList;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class Home extends Controller
 {
-
-    public function test(){
-        return 'aaaaaa';
-    }
     public function realestate()
     {
-        $property_lists =  PropertyList::paginate(25);
-        // listings()
+        // $user = new User;
+        // $user->name = 'idan';
+        // $user->email = 'idanaminov5@gmail.com';
+        // $user->password = 'aaaaaa';
+        // $user->phoneNumber = '0564188';
+        // $user->dateOfBirth = '13/12/1996';
+        // $user->save();
+        // $user->phoneNumber = $request->phoneNumber;
+        // $user->dateOfBirth = $request->dateOfBirth;
+        // $property_lists =  PropertyList::paginate(50);
+        // $property_list = PropertyList::all();
+        // $property_list = PropertyList::find(1);
 
-        // return view('home.realestate' , compact('property_lists'));
-        // return view('home.realestate');
-        return view('home.realestate',['property_lists'=> $property_lists]);
-        // return view('home.realestate')->with(compact('property_lists'));
+        // $imagee = new Image;
+        // $imagee->image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-sqI1j6i3xbykbsCa08etuakK5egN5WCUxg&usqp=CAU';
+        // $property_list->image()->save($imagee);
+        $image = Image::all();
+        // return $image;
+        // $found_key = array_search('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVJaAkILs4SUenPwEHMobUJFQxhdgnTUv3sA&usqp=CAU', array_column($image, 'image'));
+        $checkAdvancedExist = new Controller;
+
+        $rowSelected = DB::select('SELECT * FROM property_lists
+        LEFT JOIN property_characteristics ON property_characteristics.property_list_id = property_lists.id
+        LEFT JOIN general_description_of_properties ON general_description_of_properties.property_list_id = property_lists.id
+        LEFT JOIN about_properties ON about_properties.property_list_id = property_lists.id');
+
+        $property_lists = $checkAdvancedExist->paginate($rowSelected);
+
+        return view('home.realestate',['property_lists'=> $property_lists],['image' => $image]);
     }
-
-    public function realestateForelse(Request $request , $id){
-        return $id;
-        // return $request->propertyListId;
-        $test = array();
-        $string = '';
-        // return $id;
-        for( $i = 0 ; $i < strlen($id) ; $i++ ){
-            if($id[$i] != ','){
-                $string .= $id[$i];
-            }elseif($i > 0 && $id[$i] == ','){
-                array_push($test,$string);
-                $string = '';
-
-            }
-        }
-        $property_lists = PropertyList::whereIn('id', $test)->paginate(25);
-        // $property_lists =  PropertyList::paginate(2);
-
-        return view('home.realestate' , ['property_lists' => $property_lists]);
-    }
-
     public function mobileContent(Request $request)
     {
         $property_list =  PropertyList::find($request->propertyListId);
@@ -57,4 +50,3 @@ class Home extends Controller
     }
 
 }
-

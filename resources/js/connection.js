@@ -116,12 +116,20 @@ function checkEmail(object){
 }
 
 $(document).ready(function(){
+    $('#btn-create__acount').click(function(){
+        $('.register-form').submit();
+    })
+    $('#btn-new__password').click(function(){
+        $('.change-password').submit()
+    })
     $(".connected-link").click(function(){
         $(".popUpWindow").css("display","block")
     })
     $(".close-popUpWindow").click(function(){
         $(".popUpWindow").css("display","none")
-    })
+        $(".login-popupContent").css("display","flex")
+        $(".register-popupContent").css("display","none")
+        $(".password-reset__popupContent").css("display","none")    })
     $( "#btn-continued__register" ).click(function() {
         $(".popupContent-register__part1").css("display","none")
         $(".popupContent-register__part2").css("display","block")
@@ -129,7 +137,6 @@ $(document).ready(function(){
     $("#toRegister").click(function(){
         $(".login-popupContent").css("display","none")
         $(".register-popupContent").css("display","flex")
-        $(".popupContent-register__part2").css("display","none")
     })
     $("#toConnection").click(function(){
         $(".login-popupContent").css("display","flex")
@@ -139,13 +146,30 @@ $(document).ready(function(){
         $(".login-popupContent").css("display","none")
         $(".password-reset__popupContent").css("display","flex")
     })
+    $('.areaCode-btn').click(function(){
+        if($('.areaCode-icon').text() == 'expand_more'){
+            $('.areaCode-icon').text('expand_less')
+            $('.croll-num__selects').css('display', 'block');
+        }else{
+            $('.areaCode-icon').text('expand_more')
+            $('.croll-num__selects').css('display', 'none');
+        }
+    })
+    $('.croll-number div').click(function(){
+        let areaCode = $(this).text();
+        $('.areaCodeValue').text(areaCode)
+    })
+    $('.m-clean').click(function(){
+        $('.areaCodeValue').text('קידומת')
+    })
     $("#btn-check__emailIfExsist").click(function(){
         var email_check=$('#email-reseet_pass').val();
         $.ajax({
             type:'get',
-            url:"{{ route('sendVarificationCode') }}",
+            url:"send_verification_code",
             data:{'email':email_check},
             success:function(data){
+                alert(data)
                 if(data){
                     $(".send-mail__forAuth").css("display","none");
                     $(".send-for__review").css("display","flex");
@@ -165,7 +189,7 @@ $(document).ready(function(){
         var emailCheck__token = $("#email_for_change_pass").val();
         $.ajax({
             type:'get',
-            url:"{{ route('confirmToken') }}",
+            url:"check_token",
             data:{'token__confirm':token__confirm , 'email':emailCheck__token},
             success:function(data){
                 if(data){

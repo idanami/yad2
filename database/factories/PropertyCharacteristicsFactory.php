@@ -26,7 +26,6 @@ class PropertyCharacteristicsFactory extends Factory
     {
         return [
             'property_list_id' => \App\Models\PropertyList::factory(),
-            // 'property_list_id' =>  $this->faker->numberBetween($min = 1, $max = 15),
             'air_conditioning' => $this->faker->boolean(),
             'bars' => $this->faker->boolean(),
             'elevators' => $this->faker->boolean(),

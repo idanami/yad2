@@ -178,7 +178,7 @@
                                     <div>דלתות פנדור</div>
                                 </li>
                                 <li class="advanced-search__apartment-characteristic">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="parking">
                                     <div>חניה</div>
                                 </li>
                                 <li class="advanced-search__apartment-characteristic">
@@ -190,7 +190,7 @@
                                     <div>מיזוג</div>
                                 </li>
                                 <li class="advanced-search__apartment-characteristic">
-                                    <input type="checkbox">
+                                    <input type="checkbox" name="balconies">
                                     <div>מרפסת</div>
                                 </li>
                                 <li class="advanced-search__apartment-characteristic">
@@ -360,43 +360,46 @@
             </div>
         </div>
         <section style="margin-top: 1.5rem;">
-            @foreach ($property_lists as $property_list)
-            {{-- <div> {{ $property_list['update_date'] }} </div> --}}
+            {{-- @foreach ($image as  $test)
+                {{$test}}
+            @endforeach --}}
+            @foreach ($property_lists as $index => $property_list)
                 <div class="feed-lists">
-                    @forelse ($property_list->aboutPropertys as $aboutProperty)
-                    <div class="feed-list__item" value="{{$property_list['id']}}">
+                    <div class="feed-list__item" value="{{$property_list->id}}">
                             <div class="location-asset">
                                 <div class="image-container">
-                                    <img src="https://img.yad2.co.il/Pic/202104/18/2_1/o/y2_1_09912_20210418230453.jpeg?l=7&c=6&w=1024&h=768" alt="">
+                                    <img src="{{$image[$index]->image}}" alt="">
+                                    <div class="image-container__numImage" style="display: none;">
+                                        <span class="material-icons">filter_none</span>
+                                        <div class="image-container__currentNumber"></div>
+                                    </div>
                                 </div>
                                 <div class="location-asset__description">
-                                    <div> {{ $aboutProperty['street'] }} {{ $aboutProperty['house_number'] }} </div>
-                                    <div style="font-size: 0.875rem;">{{ $aboutProperty['property_type'] }}, {{ $aboutProperty['settlement'] }}, {{ $aboutProperty['city'] }}</div>
+                                    <div> {{ $property_list->street }} {{ $property_list->house_number }} </div>
+                                    <div style="font-size: 0.875rem;">{{ $property_list->property_type }}, {{ $property_list->settlement }}, {{ $property_list->city }}</div>
                                 </div>
                             </div>
                             <div class="partial-detail__asset">
                                 <div class="partial-detail__asset__data">
-                                    <div>{{ $aboutProperty['rooms_number'] }}</div>
+                                    <div>{{ $property_list->rooms_number }}</div>
                                     <div>חדרים</div>
                                 </div>
                                 <div class="partial-detail__asset__data">
-                                    <div>{{ $aboutProperty['floor_number'] }}</div>
+                                    <div>{{ $property_list->floor_number }}</div>
                                     <div>קומה</div>
                                 </div>
                                 <div class="partial-detail__asset__data">
-                                    <div>{{ $aboutProperty['square_meter'] }}</div>
+                                    <div>{{ $property_list->square_meter }}</div>
                                     <div>מ"ר</div>
                                 </div>
                             </div>
                             <div class="asset-price">
                                 <i class="material-icon__asset-price"><span class="material-icons" style="font-size: 0.8rem;">launch</span></i>
-                                <div class="asset-price__data">{{ $aboutProperty['price'] }}</div>
-                                <div class="asset-price__data">{{ $property_list['update_date'] }}</div>
+                                <div class="asset-price__data">{{ $property_list->price }}</div>
+                                <div class="asset-price__data">{{ $property_list->update_date }}</div>
                             </div>
                     </div>
-                    @empty
-                    @endforelse
-                    <div class="feed-lists__content" id="feed-lists__content{{$property_list['id']}}" style="display: none;">
+                      <div class="feed-lists__content" id="feed-lists__content{{$property_list->id}}" style="display: none;">
                             <div class="feed-lists__newProject-area">
                                 <div class="newProject-area__image">
                                     <img src="https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg">
@@ -411,109 +414,91 @@
                             </div>
                             <div class="feed-lists__content-description">
                                 <h5 class="feed-lists__subtitle">תיאור הנכס</h5>
-                                @forelse ($property_list->generalDescriptionOfProperty as $generalDescriptionOfProperty)
-                                    <div class="feed-lists__description"> {{ $generalDescriptionOfProperty['general_description'] }} </div>
-                                    <div class="general-info__lists">
+                                <div class="feed-lists__description"> {{ $property_list->general_description }} </div>
+                                <div class="general-info__lists">
                                         <div class="general-info__list">
                                             <dt>מצב הנכס</dt>
-                                            <dd> {{ $generalDescriptionOfProperty['property_condition'] }} </dd>
+                                            <dd> {{ $property_list->property_condition }} </dd>
                                         </div>
                                         <div class="general-info__list">
                                             <dt>תאריך כניסה</dt>
-                                            <dd> {{ $generalDescriptionOfProperty['entry_date'] }} </dd>
+                                            <dd> {{ $property_list->entry_date }} </dd>
                                         </div>
                                         <div class="general-info__list">
                                             <dt>קומות בבניין</dt>
-                                            <dd> {{ $generalDescriptionOfProperty['total_floors_in_the_building'] }} </dd>
+                                            <dd> {{ $property_list->total_floors_in_the_building }} </dd>
                                         </div>
                                         <div class="general-info__list">
                                             <dt>מרפסות</dt>
-                                            <dd> {{ $generalDescriptionOfProperty['balconies'] }} </dd>
+                                            <dd> {{ $property_list->balconies }} </dd>
                                         </div>
                                         <div class="general-info__list">
                                             <dt>חניות</dt>
-                                            <dd> {{ $generalDescriptionOfProperty['parking'] }} </dd>
+                                            <dd> {{ $property_list->parking }} </dd>
                                         </div>
-                                    </div>
-                                @empty
-                                @endforelse
+                                </div>
                                 <h5 class="general-info__title">מה יש בנכס?</h5>
-                                @forelse ($property_list->propertyCharacteristics as $propertyCharacteristics)
-                                    <div class="feed-lists__including-lists">
-                                        <div class="including-list" value="{{ $propertyCharacteristics['air_conditioning'] }}">
+                                <div class="feed-lists__including-lists">
+                                        <div class="including-list" value="{{ $property_list->air_conditioning }}">
                                             <span class="material-icons">ac_unit</span>
                                             <div class="including-list__info">מיזוג</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['bars'] }}">
+                                        <div class="including-list" value="{{ $property_list->bars }}">
                                             <span class="material-icons">fence</span>
                                             <div class="including-list__info">סורגים</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['elevators'] }}">
+                                        <div class="including-list" value="{{ $property_list->elevators }}">
                                             <span class="material-icons">elevator</span>
                                             <div class="including-list__info">מעלית</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['kosher_kitchen'] }}">
+                                        <div class="including-list" value="{{ $property_list->kosher_kitchen }}">
                                             <span class="material-icons">countertops</span>
                                             <div class="including-list__info">מטבח כשר</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['access_for_disabled'] }}">
+                                        <div class="including-list" value="{{ $property_list->access_for_disabled }}">
                                             <span class="material-icons">accessible</span>
                                             <div class="including-list__info">גישה לנכים</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['renovated'] }}">
+                                        <div class="including-list" value="{{ $property_list->renovated }}">
                                             <span class="material-icons">format_paint</span>
                                             <div class="including-list__info">משופצת</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['mamad'] }}">
+                                        <div class="including-list" value="{{ $property_list->mamad }}">
                                             <span class="material-icons">gite</span>
                                             <div class="including-list__info">ממ"ד</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['Storage'] }}">
+                                        <div class="including-list" value="{{ $property_list->Storage }}">
                                             <span class="material-icons">inventory_2</span>
                                             <div class="including-list__info">מחסן</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['pandor_doors'] }}">
+                                        <div class="including-list" value="{{ $property_list->pandor_doors }}">
                                             <span class="material-icons">sensor_door</span>
                                             <div class="including-list__info">דלתות פנדור</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['tadiran_air_conditioner'] }}">
+                                        <div class="including-list" value="{{ $property_list->tadiran_air_conditioner }}">
                                             <span class="material-icons">air</span>
                                             <div class="including-list__info">מזגן תדיראן</div>
                                         </div>
-                                        <div class="including-list" value="{{ $propertyCharacteristics['Furniture'] }}">
+                                        <div class="including-list" value="{{ $property_list->Furniture }}">
                                             <span class="material-icons">weekend</span>
                                             <div class="including-list__info">ריהוט</div>
                                         </div>
-                                    </div>
-                                @empty
-                                @endforelse
+                                </div>
                             </div>
                     </div>
                 </div>
+
             @endforeach
             <form action="mobile_content" method="POST" id="property_list_id" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" id='propertyListIdMobile' value="sfdgsfhgaf" name="propertyListId">
             </form>
         </section>
-        {{-- @if(count($property_lists)) --}}
-        {{-- <div class="pagination-wrapper"> --}}
+        @if(count($property_lists))
+        <div class="pagination-wrapper">
                 {{$property_lists->links("pagination.custom")}}
-{{--                 {{$property_lists->links("pagination::bootstrap-4")}}
- --}}
-            {{-- </div> --}}
-        {{-- @endif --}}
-        {{-- @if(Session::has('property_lists'))
-        <div class="alert alert-danger">
-          <div>test test</div>
-        </div>
-        @endif --}}
-        {{-- @if(isset('aagadgadadg')))
-        <div class="alert alert-danger">
-          <div>test test</div>
-        </div>
-        @endif --}}
-
+            </div>
+        @endif
 
     </main>
 </body>
