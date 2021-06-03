@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string("name");
             $table->string("phone");
+            $table->string("phone_prefix");
             $table->string("another_phone")->nullable();
             $table->string("email");
             $table->timestamps();

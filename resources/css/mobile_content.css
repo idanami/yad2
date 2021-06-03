@@ -12,6 +12,7 @@
 }
 .about-properties__mobile{
     margin-top: 1.2rem;
+    overflow: hidden;
 }
 .cityAndDate{
     display: flex;
@@ -19,6 +20,9 @@
     font-size: 0.8rem;
     padding: 0 0.9rem;
     color: #999;
+}
+.about-properties__mobile-image{
+    display: flex;
 }
 .about-properties__mobile-image img{
     width: 100%;

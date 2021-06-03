@@ -16,11 +16,10 @@ function approvalOfRegulations(AOR){
      }else{
        approval_of_regulations = false;
        validate(2)
+
     }
 }
 function validate(status){
-    $('button').css("color","#ccc");
-    $('button').css("background-color","#eee");
     var valid = true;
     if(status == 1){
         valid = checkEmail($("#email_register"));
@@ -43,6 +42,9 @@ function validate(status){
             $('#btn-create__acount').attr("disabled",false);
             $('#btn-create__acount').css("color","#fff");
             $('#btn-create__acount').css("background-color","#ff7100");
+        }else{
+            $('.btn-create__acount').css("color","#ccc");
+            $('.btn-create__acount').css("background-color","#eee");
         }
     }
     if(status == 3){
@@ -116,6 +118,25 @@ function checkEmail(object){
 }
 
 $(document).ready(function(){
+    $('#btn_login').click(function(){
+        let email_check=$('#email__login').val();
+        let pass_check =$('#password__login').val();
+        $.ajax({
+            type:'get',
+            url:"login",
+            data:{'email':email_check , 'password':pass_check},
+            success:function(data){
+                if(data == 'true'){
+
+                }else{
+                    $('.notification').css('display','block')
+                    setTimeout(function () {
+                        $('.notification').css('display','none')
+                    }, 10000);
+                }
+        },
+        });
+    })
     $('#btn-create__acount').click(function(){
         $('.register-form').submit();
     })
@@ -129,7 +150,8 @@ $(document).ready(function(){
         $(".popUpWindow").css("display","none")
         $(".login-popupContent").css("display","flex")
         $(".register-popupContent").css("display","none")
-        $(".password-reset__popupContent").css("display","none")    })
+        $(".password-reset__popupContent").css("display","none")
+     })
     $( "#btn-continued__register" ).click(function() {
         $(".popupContent-register__part1").css("display","none")
         $(".popupContent-register__part2").css("display","block")

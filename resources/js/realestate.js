@@ -1,5 +1,7 @@
-
 $(document).ready(function(){
+    $('.category-select').click(function(){
+        window.location.href = '/add_post';
+    })
     $('.feed-list__item').click(function(){
         var index_content = $(this).attr('value');
         var index_parent = $(this).parent().index();
@@ -25,23 +27,27 @@ $(document).ready(function(){
         }
     })
     $('.feed-list__item')
-    .mouseover(function(){
+    .each(function(index,value ){
         let this_value = $(this).attr('value');
-        $('.image-container__numImage').eq(this_value).css('display','block');
 
-        // alert(this_value)
-        // $.ajax({
-        //     type:'get',
-        //     url:"allImageById",
-        //     data:{'id':this_value},
-        //     success:function(data){
-        //         $('.image-container__numImage').eq(this_value).css('display','block');
-        //         $('.image-container__currentNumber').text(data+'+');
-        //     },
-        // });
+        $.ajax({
+            type:'get',
+            url:"firstImageById",
+            data:{'id':this_value,'index':index},
+            success:function(data){
+                if ($.trim(data)){
+                    $('.testimage').eq(data[2]).attr('src','images/'+data[0].image)
+                    $('.image-container__currentNumber').eq(data[2]).text(data[1]+'+');
+                }
+            },
+        });
+    })
+    .mouseover(function(index,value){
+        let this_value = $('.feed-list__item').index(this);
+        $('.image-container__numImage').eq(this_value).css('display','block');
     })
     .mouseleave(function(){
-        let this_value = $(this).attr('value')
+        let this_value = $('.feed-list__item').index(this);
         $('.image-container__numImage').eq(this_value).css('display','none');
     })
 

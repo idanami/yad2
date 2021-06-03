@@ -15,7 +15,7 @@
     <header class="publish-header">
         <div class="publish-header__description">
             <div>
-                <a href="/">
+                <a href="/realestate">
                     <img src="https://assets.yad2.co.il/personal/images/general/new_logo_orange.png">
                 </a>
                 <div class="publish-header__info">פרסום מודעה חדשה</div>

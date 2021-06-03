@@ -16,9 +16,22 @@
 </head>
 <body>
     <div class="background"></div>
-
+    @if(session()->get('LoggedUser'))
+    <a href="logout">Log;HLGFDTYSRTEASYUDIYFOPH
+        JKHIHUGFYDSAERTSYRDUIFGHJ'out</a>
+@elseif(!(session()->get('LoggedUser')))
+    <a href="login">Logifkhjlgkjrrtysdfglgh;lklktrtysdudif;l'n</a>
+    <a href="register">Rertysdudflgh;hj'jk;jl;khlgkfytartyusidf;glklgkfdgister</a>
+@endif
 <main>
+    <div class="notification">מייל אינו תקין</div>
+
     <section class="popUpWindow" style="display: none;">
+        @if(session()->get('fail'))
+        <div class="alert alert-danger" role="alert">
+            {{ session()->get('fail') }}
+        </div>
+        @endif
         <div class="close-popUpWindow" style="cursor: pointer;">x</div>
         <div class="popupContent">
             <div class="login-popupContent  popup-connection__wrapper">
@@ -33,7 +46,7 @@
                     </div>
                 </div>
                 <div class="popupContent-inner__wrapper">
-                    <form action="login" method="POST" class="popupContent-form" enctype="multipart/form-data">
+                    <form action="login" method="POST" class="popupContent-form login-form" enctype="multipart/form-data">
                         @csrf
                         <div class="header-login">
                             <h3>התחברות</h3>
@@ -236,7 +249,5 @@
 </section>
 @yield('content')
 </main>
-
-
 </body>
 </html>

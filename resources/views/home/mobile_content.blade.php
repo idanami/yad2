@@ -56,15 +56,21 @@
         <div class="feed-lists__mobile-advertising">
             <img id="image" onclick="('no' == 'no' ? loadURL('https://adclick.g.doubleclick.net/pcs/click?xai=AKAOjst1Xb3U2HCcCn2bLdnIZrRYvoIrpAEEqfWNqhVbWZbeVDXlkXZy0FWY-i09SzJI9UuNc-ozoeIOcZudJY-KU429nKo0FuaxIRoyLjIl12jNC-yFRzSXYLDH7NWpDqe3hDEJyw8zjtAZRcNJsNnIyBN4eXGHQChxi0qLKTKSaEXS7n2GuxvycJE7tCXGjo_tJ7dJc2ym2NU9gTrlJQGJHO-Ksz1sKW1CahmNswYXsVYGWMtJcL-0Q2kjLFH25QT5ZdvUDlbYoX6UOeFxH9j9R-Aq5nWPz9hbOrqZRaK_SjvVfRoLknGGf4OO8bIksPO2Qu8-&amp;sai=AMfl-YSHjYkyjRI7-culCnfl3abagU--QABxoDq-q2E0B_mXTOyFDrUNScrG8K1Zuy6TPk-MPbTp9lUoyjAVh5aWJFYUyTVk0h7e45uOm7ronm_jd0L7xVFhkUt3NgIEjOm3rnjJmQ&amp;sig=Cg0ArKJSzGBq3TQMxFX_EAE&amp;fbs_aeid=[gw_fbsaeid]&amp;urlfix=1&amp;adurl=https://www.yad2.co.il/realestate/project%3Fproject%3D3572%26site%3D_in_x1_b_490_m_nad_m_upperstrip_gedera_and_surroundings_AVISROR_YAVNE',1) : '' );" src="https://securepubads.g.doubleclick.net/pcs/view?xai=AKAOjsvcbrOKN6NR1oGVzWmQjhGG51UqtaFG7kEBZMqSCnp6s4aK9IZ11l2DLD6i3r5bxLmE3csA09U1asnHcIs8fyjjTPE4UrK2AnoH-QbJ24aVTv0Z24-rpnXlxcsStBIPtdCNQAK0w-f829M8jXRKGDCyme53M5G-NblikZvaC1ZLH8IxfIMoPb5xcfN2RFpzq7qc5l8qg2IMddcZcSKBYogRLtHvc82cy0KLSRHH1sKt6N2eAZfll1qCBq9CDCxtPzYNG_dc0uTkSNod18mdsUcyLZ1d0x2a3tLVeirkQbxwO4EETqcFhsinKvLmxUGBNRxYbRs5_Ib3&amp;sai=AMfl-YT9xRygEUF41ix4h3G8-Jd4Tvm_-dz2SRFxSPVb44lxOeqRBtctLW_E1-rBCSOyyxDGkAd6a_OclbS_sWtjIFRy4kuFCnH5DboVp9PWcAa4zT3Nu08U_txwiTKo4GYS2vmqsQ&amp;sig=Cg0ArKJSzKqnxRb3IyVrEAE&amp;urlfix=1&amp;adurl=https://tpc.googlesyndication.com/simgad/3424697005856076381?">
         </div>
+        @forelse ($property_list->aboutPropertys as $index => $aboutProperty)
+        <div class="about-properties__mobile">
+            <div class="cityAndDate">
+                <div>{{ $aboutProperty['property_type'] }} למכירה ב{{ $aboutProperty['city'] }}</div>
+                <div>{{ $property_list['update_date'] }}</div>
+            </div>
+            <div class="about-properties__mobile-image">
+                @if ( isset($property_list->image[$index]->image) )
+                    {{-- @foreach ($property_list->image as $index=>$image)
 
-            @forelse ($property_list->aboutPropertys as $aboutProperty)
-                <div class="about-properties__mobile">
-                    <div class="cityAndDate">
-                        <div>{{ $aboutProperty['property_type'] }} למכירה ב{{ $aboutProperty['city'] }}</div>
-                        <div>{{ $property_list['update_date'] }}</div>
-                    </div>
-                    <div class="about-properties__mobile-image">
-                        <img src="https://img.yad2.co.il/Pic/202104/18/2_1/o/y2_1_09912_20210418230453.jpeg?l=7&c=6&w=1024&h=768" alt="">
+                    @endforeach --}}
+                    <img src="images/{{$property_list->image[$index]->image}}" alt="">
+                @else
+                    <img src="" alt="">
+                @endif
                     </div>
                     <div class="about-properties__mobile-content">
                         <div style="font-size: 1.5rem;"><strong>{{ $aboutProperty['price'] }}</strong></div>

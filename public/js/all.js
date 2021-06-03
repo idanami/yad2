@@ -16,11 +16,10 @@ function approvalOfRegulations(AOR){
      }else{
        approval_of_regulations = false;
        validate(2)
+
     }
 }
 function validate(status){
-    $('button').css("color","#ccc");
-    $('button').css("background-color","#eee");
     var valid = true;
     if(status == 1){
         valid = checkEmail($("#email_register"));
@@ -43,6 +42,9 @@ function validate(status){
             $('#btn-create__acount').attr("disabled",false);
             $('#btn-create__acount').css("color","#fff");
             $('#btn-create__acount').css("background-color","#ff7100");
+        }else{
+            $('.btn-create__acount').css("color","#ccc");
+            $('.btn-create__acount').css("background-color","#eee");
         }
     }
     if(status == 3){
@@ -116,6 +118,25 @@ function checkEmail(object){
 }
 
 $(document).ready(function(){
+    $('#btn_login').click(function(){
+        let email_check=$('#email__login').val();
+        let pass_check =$('#password__login').val();
+        $.ajax({
+            type:'get',
+            url:"login",
+            data:{'email':email_check , 'password':pass_check},
+            success:function(data){
+                if(data == 'true'){
+
+                }else{
+                    $('.notification').css('display','block')
+                    setTimeout(function () {
+                        $('.notification').css('display','none')
+                    }, 10000);
+                }
+        },
+        });
+    })
     $('#btn-create__acount').click(function(){
         $('.register-form').submit();
     })
@@ -129,7 +150,8 @@ $(document).ready(function(){
         $(".popUpWindow").css("display","none")
         $(".login-popupContent").css("display","flex")
         $(".register-popupContent").css("display","none")
-        $(".password-reset__popupContent").css("display","none")    })
+        $(".password-reset__popupContent").css("display","none")
+     })
     $( "#btn-continued__register" ).click(function() {
         $(".popupContent-register__part1").css("display","none")
         $(".popupContent-register__part2").css("display","block")
@@ -205,8 +227,10 @@ $(document).ready(function(){
     })
 })
 
-
 $(document).ready(function(){
+    $('.category-select').click(function(){
+        window.location.href = '/add_post';
+    })
     $('.feed-list__item').click(function(){
         var index_content = $(this).attr('value');
         var index_parent = $(this).parent().index();
@@ -232,21 +256,28 @@ $(document).ready(function(){
         }
     })
     $('.feed-list__item')
-    .mouseover(function(){
+    .each(function(index,value ){
         let this_value = $(this).attr('value');
-        $('.image-container__numImage').eq(this_value-1).css('display','block');
+
         $.ajax({
             type:'get',
-            url:"allImageById",
-            data:{'id':this_value},
+            url:"firstImageById",
+            data:{'id':this_value,'index':index},
             success:function(data){
-                $('.image-container__currentNumber').text(data+'+');
+                if ($.trim(data)){
+                    $('.testimage').eq(data[2]).attr('src','images/'+data[0].image)
+                    $('.image-container__currentNumber').eq(data[2]).text(data[1]+'+');
+                }
             },
         });
     })
+    .mouseover(function(index,value){
+        let this_value = $('.feed-list__item').index(this);
+        $('.image-container__numImage').eq(this_value).css('display','block');
+    })
     .mouseleave(function(){
-        let this_value = $(this).attr('value')
-        $('.image-container__numImage').eq(this_value-1).css('display','none');
+        let this_value = $('.feed-list__item').index(this);
+        $('.image-container__numImage').eq(this_value).css('display','none');
     })
 
 })
@@ -277,8 +308,86 @@ $(document).ready(function(){
 
 });
 
+$(document).ready(function(){
+    let imageIndexByClassName = 0;
+    $('.btn-next').click(function(){
+        let index = $('.btn-next').index(this);
+        // $('.publish-step__add').eq(index+1).css('display','none')
+        // $('.publish-step__description').eq(index+1).css('display','block')
+        // $('.publish-step__items').eq(index+1).css('background','#f9f9f9')
+    })
+    $('.btn-add_post').click(function(){
+        $('.add-post__form').submit();
+    })
+
+    $(".category-select__item")
+    .mouseover(function(){
+        $(this).css('border', '1px solid #ff7100')
+        $(this).find('svg g g path').css('fill','#ff7100')
+        $(this).find('div').css('color','#ff7100')
+
+    })
+    .mouseleave(function(){
+        $(this).css('border', '1px solid #ccc')
+        $(this).find('svg g g path').css('fill','rgb(127, 127, 127)')
+        $(this).find('div').css('color','rgb(0, 0, 0)')
+    })
+    $('.multiImageUpdateLable').click(function(){
+        imageIndexByClassName=  $(this).attr('value');
+    })
+    $('#multiImageUpdate').change(function(event) {
+        multiImgToData(this);
+    });
+    $('#imageUpdate').change(function(event) {
+        imgToData(this,'firstImage','firstImageLabel');
+    });
+    $('#videoUpdate').change(function(event) {
+        imgToData(this,'firstVideo','firstVideoLabel');
+    });
+
+    function imgToData(input,setImageLocal,index) {
+        if (input.files) {
+            var File = new FileReader();
+            File.onload = function(event) {
+            $('<img/>').attr({
+                src: event.target.result,
+                class: `${setImageLocal}Show`,
+                id: `primary${setImageLocal}Show`,
+            }).appendTo(`.${setImageLocal}`);
+            };
+            $(`.${index}`).css('display','none');
+            $(`.${setImageLocal}`).css('display','block');
+            File.readAsDataURL(input.files[0]);
+        }
+    }
+    function multiImgToData(input) {
+        if (input.files) {
+            var setIn = Number(imageIndexByClassName);
+            var length = input.files.length;
+            $.each(input.files, function(i, v) {
+                var n = i + setIn;
+                if(($($(".imageAdded")[n]).find('.imgshow').length) == 0){
+                    var File = new FileReader();
+                    File.onload = function(event) {
+                    $('<img/>').attr({
+                        src: event.target.result,
+                        class: 'imgshow',
+                        id: 'img-' + n + '-preview',
+                    }).appendTo($(".imageAdded")[n]);
+                    };
+                    $('.multiImageUpdateLable').eq(n).css('display','none')
+                    $('.imageAdded').eq(n).css('display','block')
+                    File.readAsDataURL(input.files[i]);
+                }
+            });
+        }
+    }
+})
+
 // require('./bootstrap');
 $(document).ready(function(){
+
+
 
     $('button').click(function(event) {
         var spanCheck = $(this).children('span').text();

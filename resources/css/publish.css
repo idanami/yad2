@@ -52,13 +52,22 @@
     grid-column-gap: 1.5625rem;
 }
 .category-select{
+    cursor: pointer;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 3px 10px 0 rgb(0 0 0 / 5%);
+    padding: 1rem;
+}
+.category-select svg{
+    margin-bottom: 0.4rem;
+}
+.category-select h3{
+    display: initial;
+    font-size: 1.6rem;
 }
 .category-select__description{
     width: 70%;
-    margin: auto;
+    margin: 0.6rem auto;
 }
 
 @media (min-width: 55rem) {

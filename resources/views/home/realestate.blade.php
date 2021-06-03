@@ -14,14 +14,14 @@
             <button class="toggle-button">
                 <i class="toggle-button__bar"><span class="material-icons">menu</span></i>
             </button>
-            <a href="/" class="main-header__brand__mobile">
+            <a href="/realestate" class="main-header__brand__mobile">
                 <img src="//assets.yad2.co.il/yad2site/y2assets/images/header/Yad2_logo_white2.svg" alt="לוגו יד2 yad2 logo">
             </a>
         </div>
         <nav class="main-nav">
                 <ul class="main-nav__items">
                     <li class="main-nav__item-image">
-                        <div><a href="/" class="main-header__brand">
+                        <div><a href="/realestate" class="main-header__brand">
                             <img src="//assets.yad2.co.il/yad2site/y2assets/images/header/yad2Logo.png" alt="לוגו יד2 yad2 logo">
                         </a></div>
                     </li>
@@ -359,19 +359,18 @@
                 </button>
             </div>
         </div>
-        <section style="margin-top: 1.5rem;">
-            {{-- @foreach ($image as  $test)
-                {{$test}}
-            @endforeach --}}
+        <section class="all-feed__list" style="margin-top: 1.5rem;">
             @foreach ($property_lists as $index => $property_list)
                 <div class="feed-lists">
                     <div class="feed-list__item" value="{{$property_list->id}}">
                             <div class="location-asset">
                                 <div class="image-container">
-                                    <img src="{{$image[$index]->image}}" alt="">
+
+                                    {{-- <img class="testimage" src="" alt="{{$property_list->id}}"> --}}
+                                    <img class="testimage" src="{{$property_list->id}}" alt="">
                                     <div class="image-container__numImage" style="display: none;">
                                         <span class="material-icons">filter_none</span>
-                                        <div class="image-container__currentNumber"></div>
+                                        <div class="image-container__currentNumber">0+</div>
                                     </div>
                                 </div>
                                 <div class="location-asset__description">

@@ -15,6 +15,7 @@ const mix = require('laravel-mix');
     'resources/js/connection.js',
     'resources/js/realestate.js',
     'resources/js/mobileContent.js',
+    'resources/js/add_post.js',
     'resources/js/app.js'
 ], 'public/js/all.js')
     .styles([

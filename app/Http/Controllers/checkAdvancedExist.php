@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Response;
 
 class checkAdvancedExist extends Controller
 {
@@ -111,12 +112,23 @@ class checkAdvancedExist extends Controller
         $image = Image::all();
         return view('home.realestate' , ['property_lists' => $property_lists],['image'=>$image]);
     }
-        public function checkImageExist(Request $request){
 
+        public function checkImageExist(Request $request){
             $property_lists =PropertyList::find($request->id);
             $rowNumber= count($property_lists->image);
             return $rowNumber;
 
         }
+        public function firstImageById(Request $request){
+            $property_lists = PropertyList::find($request->id)->image;
+            $index = $request->index;
+            if(count($property_lists)){
+                $firstImage = $property_lists[0];
+                $numImages = count($property_lists);
+                $data = [$firstImage,$numImages,$index];
+                return Response::json($data);
 
+            }
+            return $property_lists;
+        }
 }

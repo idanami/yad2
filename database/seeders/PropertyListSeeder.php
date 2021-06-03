@@ -19,15 +19,15 @@ class PropertyListSeeder extends Seeder
      */
     public function run()
     {
-        PropertyList::factory()->times(40000)->create()->each(function($add){
+        PropertyList::factory()->times(15)->create()->each(function($add){
             $aboutProperty = AboutProperty::factory()->make();
-            $image = Image::factory()->make();
+            // $image = Image::factory()->make();
             $generalDescriptionOfProperty = GeneralDescriptionOfProperty::factory()->make();
             $propertyCharacteristics = PropertyCharacteristics::factory()->make();
             $add->propertyCharacteristics()->save($propertyCharacteristics);
             $add->aboutPropertys()->save($aboutProperty);
             $add->generalDescriptionOfProperty()->save($generalDescriptionOfProperty);
-            $add->image()->save($image);
+            // $add->image()->save($image);
         });
     }
 }

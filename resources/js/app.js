@@ -1,6 +1,8 @@
 // require('./bootstrap');
 $(document).ready(function(){
 
+
+
     $('button').click(function(event) {
         var spanCheck = $(this).children('span').text();
         var divCheck = $(this).children('div').text();
