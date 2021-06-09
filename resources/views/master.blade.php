@@ -6,9 +6,9 @@
     <title>@yield('title') - page</title>
     <link href="/css/all.css" rel="stylesheet">
     {{-- <link href="http://yad2//css/all.css" rel="stylesheet"> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> --}}
-
+    <link href="path/to/lightbox.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="path/to/lightbox.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.19/ua-parser.min.js"></script>
     <script src="{{ mix('/js/all.js') }}"></script>
@@ -16,13 +16,6 @@
 </head>
 <body>
     <div class="background"></div>
-    @if(session()->get('LoggedUser'))
-    <a href="logout">Log;HLGFDTYSRTEASYUDIYFOPH
-        JKHIHUGFYDSAERTSYRDUIFGHJ'out</a>
-@elseif(!(session()->get('LoggedUser')))
-    <a href="login">Logifkhjlgkjrrtysdfglgh;lklktrtysdudif;l'n</a>
-    <a href="register">Rertysdudflgh;hj'jk;jl;khlgkfytartyusidf;glklgkfdgister</a>
-@endif
 <main>
     <div class="notification">מייל אינו תקין</div>
 
@@ -55,7 +48,7 @@
                         <div class="popupContent-inner">
                             <div class="popupContent-login__input__wrapper">
                                 <div class="popupContent-login__input__text">
-                                    <label for="email">כתובת מייל</label>
+                                    <label for="email__login">כתובת מייל</label>
                                     <input type="text" id="email__login" name="email__login" placeholder="your@mail.com" onkeyup="validate(6)">
                                 </div>
                                 <div class="popupContent-login__input__text">

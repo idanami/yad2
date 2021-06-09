@@ -13,11 +13,8 @@ class Home extends Controller
 {
     public function realestate()
     {
-        // $imagee = new Image;
-        // $imagee->image = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh2WifO7JjBBBBUPSHAVoNyyoLMPwbmejVig&usqp=CAU';
-        // $property_list->image()->save($imagee);
-        $image = Image::all();
-
+        $image = Image::where('id','=',1)->get();
+        
         $checkAdvancedExist = new Controller;
         $rowSelected = DB::select('SELECT * FROM property_lists
         LEFT JOIN property_characteristics ON property_characteristics.property_list_id = property_lists.id
@@ -25,7 +22,6 @@ class Home extends Controller
         LEFT JOIN about_properties ON about_properties.property_list_id = property_lists.id');
 
         $property_lists = $checkAdvancedExist->paginate($rowSelected);
-        // return 'kk';
 
         return view('home.realestate',['property_lists'=> $property_lists],['image' => $image]);
     }

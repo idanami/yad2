@@ -34,13 +34,41 @@
                     <li class="main-nav__item"><div>בעלי מקצוע</div></li>
                     <li class="main-nav__item"><div>ועוד...</div></li>
                 </ul>
-            <ul class="main-nav__items">
+            <ul class="main-nav__items" style="height: 100%;">
                 <li class="main-nav__item"><a href="">
                     <span class="material-icons">favorite_border</span></a></li>
                 <li class="main-nav__item"><a href="">
                     <span class="material-icons">notifications_none</span></a></li>
-                <li class="main-nav__item connected-link" style="cursor: pointer;">
-                    <span class="material-icons" style="color: rgb(0, 0, 0);">account_circle</span></li>
+                @if(session()->get('LoggedUser'))
+                    <li class="main-nav__item connected-link disconnect" style="cursor: pointer; position: relative; height: 100%; padding: 0.85rem  0;">
+                        <div class="connectetFirstLatterName">{{ session()->get('LoggedUser') }}</div>
+                        <div class="user_dropdown">
+                            <div class="dropdown_item">
+                                <span class="material-icons" style="color: black;">person_outline</span>
+                                <div>איזור אישי</div>
+                            </div>
+                            <div class="dropdown_item">
+                                <span class="material-icons" style="color: black;">compare_arrows</span>
+                                <div>השוואת רכבים</div>
+                            </div>
+                            <div class="dropdown_item">
+                                <span class="material-icons" style="color: black;">youtube_searched_for</span>
+                                <div>חיפושים אחרונים</div>
+                            </div>
+                            <div class="dropdown_item disconnect_click">
+                                <span class="material-icons" style="color: black;">sensor_door</span>
+                                <div>התנתקות</div>
+                            </div>
+                        </div>
+                    </li>
+                    <form action="logout" method="GET" id="logout_form" enctype="multipart/form-data">
+                        @csrf
+                    </form>
+
+                @else
+                    <li class="main-nav__item connected-link" style="cursor: pointer;">
+                        <span class="material-icons" style="color: rgb(0, 0, 0);">account_circle</span></li>
+                @endif
                 <li class="main-nav__item new-post__add"><a href="publish">
                     <span class="material-icons">add</span>
                     <i>פרסום מודעה חדשה</i>
@@ -104,17 +132,12 @@
         </section>
 
     <main>
-
         <div class="title">
             <div class="title-description">
                 <div>ראשי</div>
                 <span>\</span>
                 <div>נכסים למכירה</div>
             </div>
-            <button class="accessibility-btn">
-                <span class="material-icons">accessibility_new</span>
-                <i>נגישות</i>
-            </button>
         </div>
 
         <section class="search-wrapper">
@@ -359,26 +382,35 @@
                 </button>
             </div>
         </div>
+
+
+            {{-- @foreach ($image as $file)
+                    <a class="example-image-link"  href="{{$file->image}}" data-lightbox="images">
+                        <img class="testimage" src="{{$file->image}}" alt="">
+                    </a> --}}
+            {{-- @endforeach --}}
+            
+        </div>
         <section class="all-feed__list" style="margin-top: 1.5rem;">
             @foreach ($property_lists as $index => $property_list)
                 <div class="feed-lists">
-                    <div class="feed-list__item" value="{{$property_list->id}}">
-                            <div class="location-asset">
-                                <div class="image-container">
+                    <div class="post-images post-images{{$index}}" style="display: none;"></div>
 
-                                    {{-- <img class="testimage" src="" alt="{{$property_list->id}}"> --}}
+                    <div class="feed-list__item" value="{{$property_list->id}}">
+                        <div class="location-asset">
+                                <div class="image-container" value="{{$property_list->id}}">
                                     <img class="testimage" src="{{$property_list->id}}" alt="">
                                     <div class="image-container__numImage" style="display: none;">
                                         <span class="material-icons">filter_none</span>
-                                        <div class="image-container__currentNumber">0+</div>
+                                        <div class="image-container__currentNumber" value>0+</div>
                                     </div>
                                 </div>
                                 <div class="location-asset__description">
                                     <div> {{ $property_list->street }} {{ $property_list->house_number }} </div>
                                     <div style="font-size: 0.875rem;">{{ $property_list->property_type }}, {{ $property_list->settlement }}, {{ $property_list->city }}</div>
                                 </div>
-                            </div>
-                            <div class="partial-detail__asset">
+                        </div>
+                        <div class="partial-detail__asset">
                                 <div class="partial-detail__asset__data">
                                     <div>{{ $property_list->rooms_number }}</div>
                                     <div>חדרים</div>
@@ -391,14 +423,14 @@
                                     <div>{{ $property_list->square_meter }}</div>
                                     <div>מ"ר</div>
                                 </div>
-                            </div>
-                            <div class="asset-price">
+                        </div>
+                        <div class="asset-price">
                                 <i class="material-icon__asset-price"><span class="material-icons" style="font-size: 0.8rem;">launch</span></i>
                                 <div class="asset-price__data">{{ $property_list->price }}</div>
                                 <div class="asset-price__data">{{ $property_list->update_date }}</div>
-                            </div>
+                        </div>
                     </div>
-                      <div class="feed-lists__content" id="feed-lists__content{{$property_list->id}}" style="display: none;">
+                    <div class="feed-lists__content" id="feed-lists__content{{$property_list->id}}" style="display: none;">
                             <div class="feed-lists__newProject-area">
                                 <div class="newProject-area__image">
                                     <img src="https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg">
@@ -485,8 +517,18 @@
                                 </div>
                             </div>
                     </div>
+                    <button class="btn-contact">
+                        <div class="btn-contact__description">
+                            <span class="material-icons" style="color: #fff;">phone_in_talk</span>
+                            <i style="color: #fff">הצגת מספר טלפון</i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contactName"></div>
+                            <div class="contactPhoneNumber"></div>
+                            <div>שליחת דוא"ל למפרסם</div>
+                        </div>
+                    </button>
                 </div>
-
             @endforeach
             <form action="mobile_content" method="POST" id="property_list_id" enctype="multipart/form-data">
                 @csrf
@@ -500,5 +542,34 @@
         @endif
 
     </main>
+    <section class="footer">
+        <div class="footer-category__links">
+            <ul class="footer-category__lists">
+                <li class="footer-category__link">רכב</li>
+                <li class="footer-category__link">נדל"ן</li>
+                <li class="footer-category__link">יד שניה</li>
+                <li class="footer-category__link">דרושים IL</li>
+            </ul>
+        </div>
+        <div class="social_links">
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/apple.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/google-play.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/facebook.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/youtube.png"></a>
+        </div>
+        <p class="copyrights_text">כל הזכויות שמורות לחברת קורל תל מפעילות לוח יד2 - לוח מודעות: דרושים IL, דירות להשכרה, בתים למכירה, בתים להשכרה, העברת בתים,הובלות אין לעשות שימוש בכל התכנים המופיעים בלוח יד2.</p>
+            <hr>
+            <nav class="footer-menu">
+                <a href="/eula" target="_self" class="footer-menu__link">תקנון</a>
+                <a href="/accessibility_statement" target="_self" class="footer-menu__link">הצהרת נגישות</a>
+                <a href="/privacy" target="_self" class="footer-menu__link">מדיניות פרטיות</a>
+                <a href="/sitemap" target="_self" class="footer-menu__link">מפת האתר</a>
+                <button class="footer-menu__link">צור קשר</button>
+                <a class="footer-menu__link">
+                    <span class="material-icons" style="vertical-align: middle; color: #fff;">accessibility</span>
+                    <i style="color: #fff;">נגישות</i>
+                </a>
+            </nav>
+    </section>
 </body>
 </html>

@@ -114,10 +114,10 @@ class checkAdvancedExist extends Controller
     }
 
         public function checkImageExist(Request $request){
-            $property_lists =PropertyList::find($request->id);
-            $rowNumber= count($property_lists->image);
-            return $rowNumber;
-
+            // return $request->value;
+            $image = Image::where('property_list_id','=',$request->value)->get();
+            $data = [$image,$request->index];
+            return Response::json($data);
         }
         public function firstImageById(Request $request){
             $property_lists = PropertyList::find($request->id)->image;
@@ -125,9 +125,8 @@ class checkAdvancedExist extends Controller
             if(count($property_lists)){
                 $firstImage = $property_lists[0];
                 $numImages = count($property_lists);
-                $data = [$firstImage,$numImages,$index];
+                $data = [$firstImage,$numImages,$index,$request->id];
                 return Response::json($data);
-
             }
             return $property_lists;
         }

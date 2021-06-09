@@ -16,11 +16,13 @@ const mix = require('laravel-mix');
     'resources/js/realestate.js',
     'resources/js/mobileContent.js',
     'resources/js/add_post.js',
+    'resources/js/lightbox-plus-jquery.min.js',
     'resources/js/app.js'
 ], 'public/js/all.js')
     .styles([
     'resources/css/yad2.css',
     'resources/css/app.css',
+    'resources/css/lightbox.min.css',
     'resources/css/add_post.css',
     'resources/css/publish.css',
     'resources/css/mobile_content.css',

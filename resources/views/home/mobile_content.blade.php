@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 @extends('master')
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,12 +63,13 @@
             </div>
             <div class="about-properties__mobile-image">
                 @if ( isset($property_list->image[$index]->image) )
-                    {{-- @foreach ($property_list->image as $index=>$image)
-
-                    @endforeach --}}
-                    <img src="images/{{$property_list->image[$index]->image}}" alt="">
-                @else
-                    <img src="" alt="">
+                    @foreach ($property_list->image as $index=>$image)
+                    <a class="example-image-link" href="{{$property_list->image[$index]->image}}" data-lightbox="roadtrip">
+                        <img src="{{$property_list->image[$index]->image}}" alt="">
+                    </a>
+                    @endforeach
+                    @else
+                    <img src="https://assets.yad2.co.il/yad2site/y2assets/images/pages/feed/feed_re_placeholder.png" alt="">
                 @endif
                     </div>
                     <div class="about-properties__mobile-content">

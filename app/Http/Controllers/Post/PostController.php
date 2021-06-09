@@ -74,14 +74,14 @@ class PostController extends Controller
             $name = time().'-'.$imageFiles->getClientOriginalName();
             $name = str_replace(' ','-',$name);
             $imageFiles->move('images',$name);
-            $propertyList->image()->create(['image'=>$name]);
+            $propertyList->image()->create(['image'=>'images/'.$name]);
         }
         if($request->hasFile('video')){
             $videoFiles = $request->file('video');
             $name = time().'-'.$videoFiles->getClientOriginalName();
             $name = str_replace(' ','-',$name);
             $videoFiles->move('images',$name);
-            $propertyList->image()->create(['image'=>$name]);
+            $propertyList->image()->create(['image'=>'images/'.$name]);
         }
         if($request->hasFile('multiImage')){
             $multiImageFiles = $request->file('multiImage');
@@ -89,10 +89,10 @@ class PostController extends Controller
                 $name = time().'-'.$file->getClientOriginalName();
                 $name = str_replace(' ','-',$name);
                 $file->move('images',$name);
-                $propertyList->image()->create(['image'=>$name]);
+                $propertyList->image()->create(['image'=>'images/'.$name]);
             }
         }
-        return $request->get('prefix_phone').'---'.$request->get('property_type');
+        return redirect('realestate');
 
     }
 }

@@ -15,18 +15,21 @@
         <form action="newPost" method="POST" class="add-post__form" enctype="multipart/form-data">
             @csrf
             <div class="publish-step__items">
-                <div class="publish-step__description">
+                <div class="publish-step__description publish-step__description-first">
                     <span class="numIcon">1</span>
                     <h3 class="publish-category__select__subtitle">אני רוצה למכור את הנכס</h3>
+                                        <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
-                <div class="publish-step__add">
+                <div class="publish-step__add publish-step__add-first">
                     <span class="numIcon">1</span>
                     <ul class="publish-category__select">
                         <h3 class="publish-category__select__subtitle">באיזו קטגוריה נפרסם היום?</h3>
                         <div class="category-select__items">
-                        <div class="category-select__item">
+                        <div class="category-select__item category-select__item-first">
                             <svg id="subCategoryRealEstateSale" alt="מכירה" width="80px" height="78px" viewBox="0 0 80 78" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <!-- Generator: sketchtool 51 (57462) - http://www.bohemiancoding.com/sketch -->
                                 <title>מכירה</title>
                                 <desc>Created with sketchtool.</desc>
                                 <defs></defs>
@@ -154,6 +157,10 @@
                 <div class="publish-step__description">
                     <span class="numIcon">2</span>
                     <h3 class="publish-category__select__subtitle">כתובת הנכס</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">2</span>
@@ -233,6 +240,10 @@
                 <div class="publish-step__description">
                     <span class="numIcon">3</span>
                     <h3 class="publish-category__select__subtitle">על הנכס</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">3</span>
@@ -396,6 +407,10 @@
                 <div class="publish-step__description">
                     <span class="numIcon">4</span>
                     <h3 class="publish-category__select__subtitle">תשלומים, תאריכים ועוד</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">4</span>
@@ -404,7 +419,7 @@
                         <div class="addPost-post__item square-property">
                             <div class="addPost-post__item square-property__list">
                                 <label for="squareProperty">מ"ר בנוי</label>
-                                <input type="text" id="builtMeter" name='כמה מ"ר יש בנכס' placeholder="איפה נמצא הנכס?">
+                                <input type="text" id="builtMeter" name='כמה מ"ר יש בנכס' placeholder="גודל הנכס">
                             </div>
                             <div class="addPost-post__item square-property__list">
                                 <label for="gardenMeter">מ"ר גינה</label>
@@ -422,7 +437,7 @@
                             </div>
                             <div class="addPost-post__item">
                                 <label for="entryDatePost">תאריך כניסה</label>
-                                <input type="text" id="entryDatePost" name="entry_date">
+                                <input type="date" id="entryDatePost" name="entry_date">
                             </div>
                         </div>
                         <div class="btn-nextAnd__previous">
@@ -436,6 +451,10 @@
                 <div class="publish-step__description">
                     <span class="numIcon">5</span>
                     <h3 class="publish-category__select__subtitle">תמונות וסרטונים</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">5</span>
@@ -624,6 +643,10 @@
                 <div class="publish-step__description">
                     <span class="numIcon">6</span>
                     <h3 class="publish-category__select__subtitle">פרטים ליצירת קשר</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">6</span>
@@ -641,6 +664,7 @@
                             </div>
                             <div class="addPost-post__item contact-info__item">
                                 <select name="prefix_phone" id="prefixPhone">
+                                    <option value=""></option>
                                     <option value="050">050</option>
                                     <option value="051">051</option>
                                     <option value="052">052</option>
@@ -675,8 +699,12 @@
             </div>
             <div class="publish-step__items">
                 <div class="publish-step__description">
-                    <span class="numIcon">6</span>
+                    <span class="numIcon">7</span>
                     <h3 class="publish-category__select__subtitle">סיום פרסום</h3>
+                    <button class="editing">
+                        <span class="material-icons" style="color: #999; font-size: 1.1rem; vertical-align: middle;">mode</span>
+                        <i style="color: #999;">עריכה</i>
+                    </button>
                 </div>
                 <div class="publish-step__add">
                     <span class="numIcon">7</span>

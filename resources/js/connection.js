@@ -123,11 +123,11 @@ $(document).ready(function(){
         let pass_check =$('#password__login').val();
         $.ajax({
             type:'get',
-            url:"login",
+            url:"check_login_ajax",
             data:{'email':email_check , 'password':pass_check},
             success:function(data){
                 if(data == 'true'){
-
+                    $('.login-form').submit();
                 }else{
                     $('.notification').css('display','block')
                     setTimeout(function () {

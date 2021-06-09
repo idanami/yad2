@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\Reset\PasswordReset;
 use App\Http\Controllers\checkAdvancedExist;
+use App\Http\Controllers\GetContact;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Post\PostController;
 use Illuminate\Support\Facades\Route;
@@ -33,19 +34,22 @@ Route::get('/add_post', function (){
     return view('publish.add_post');
 });
 
-Route::get('/realestate',[Home::class,'realestate'])->name('realestate');
+Route::get('/realestate',[Home::class,'realestate']);
 
 Route::post('/mobile_content',[Home::class,'mobileContent']);
 
 Route::get('/check_advanced',[checkAdvancedExist::class,'checkAdvancedExist'])->name('checkAdvanced');
 Route::get('/allImageById',[checkAdvancedExist::class,'checkImageExist'])->name('imageById');
 Route::get('/firstImageById',[checkAdvancedExist::class,'firstImageById']);
+Route::get('/getContact',[GetContact::class,'getContacts']);
 
 Route::post('/newPost',[PostController::class,'newPost']);
 
 
-Route::get('/register',[RegisterController::class,'register_process']);
-Route::get('/login',[LoginController::class,'login_process']);
+Route::post('/register',[RegisterController::class,'register_process']);
+Route::post('/login',[LoginController::class,'login_process']);
+Route::get('/logout',[LoginController::class,'logout']);
+Route::get('/check_login_ajax',[LoginController::class,'login_ajax']);
 
 Route::get('send_verification_code', [PasswordReset::class,'validatePasswordRequest']);
 Route::get('check_token', [PasswordReset::class,'confirmToken'])->name('confirmToken');

@@ -28,6 +28,7 @@ button{
 }
 a{
     cursor: pointer;
+    color: #fff;
 }
 p,h3,dd,h1,h2,h3,h4,h5,h6{
     margin: 0;
@@ -70,4 +71,18 @@ input[type="checkbox"]
 }
 label{
     cursor: pointer;
+}
+.lightbox{
+    width: 100% !important;
+    height: 70% !important;
+
+}
+.lb-outerContainer,
+.lb-container,
+.lb-container img{
+    width: 100% !important;
+    height: 100% !important;
+}
+hr{
+    border: .5px solid #606060;
 }

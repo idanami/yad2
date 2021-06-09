@@ -29,10 +29,7 @@ class RegisterController extends Controller
         $user->phoneNumber = $request->phoneNumber;
         $user->dateOfBirth = $request->dateOfBirth;
         $user->save();
-        return $request->dateOfBirth;
-    }
-    public function index()
-    {
-        return 'test';
+        $request->session()->put('LoggedUser',substr($user->name,0,1));
+        return redirect('realestate');
     }
 }
