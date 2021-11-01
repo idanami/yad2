@@ -21,5 +21,10 @@ $(document).ready(function(){
             $('.property-characteristics__mobile-item span').eq(this_index).css('background-color','#eee')
         }
     });
-
+    $('.mobile-contact__btn').click(function(){
+        if($('.contact-mobile').css('display') == 'none')
+            $('.contact-mobile').css('display','block')
+        else
+            $('.contact-mobile').css('display','none')
+    })
 });

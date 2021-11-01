@@ -23,10 +23,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/', function () {
-//     $property_lists =  PropertyList::first();
-//     return view('home.mobile_content')->with('property_lists',$property_lists);
-// });
 Route::get('/publish', function (){
     return view('publish.publish');
 });
@@ -38,12 +34,13 @@ Route::get('/realestate',[Home::class,'realestate']);
 
 Route::post('/mobile_content',[Home::class,'mobileContent']);
 
-Route::get('/check_advanced',[checkAdvancedExist::class,'checkAdvancedExist'])->name('checkAdvanced');
+Route::post('/check_advanced',[checkAdvancedExist::class,'checkAdvancedExist'])->name('checkAdvanced');
 Route::get('/allImageById',[checkAdvancedExist::class,'checkImageExist'])->name('imageById');
 Route::get('/firstImageById',[checkAdvancedExist::class,'firstImageById']);
 Route::get('/getContact',[GetContact::class,'getContacts']);
 
 Route::post('/newPost',[PostController::class,'newPost']);
+Route::get('/check_field',[PostController::class,'checkField']);
 
 
 Route::post('/register',[RegisterController::class,'register_process']);

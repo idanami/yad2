@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Image;
 use App\Models\PropertyList;
 use App\Models\User;
@@ -14,7 +15,7 @@ class Home extends Controller
     public function realestate()
     {
         $image = Image::where('id','=',1)->get();
-        
+
         $checkAdvancedExist = new Controller;
         $rowSelected = DB::select('SELECT * FROM property_lists
         LEFT JOIN property_characteristics ON property_characteristics.property_list_id = property_lists.id
@@ -28,7 +29,8 @@ class Home extends Controller
     public function mobileContent(Request $request)
     {
         $property_list =  PropertyList::find($request->propertyListId);
-        return view('home.mobile_content')->with('property_list',$property_list);;
+        $contact = Contact::find($request->propertyListId);
+        return view('home.mobile_content')->with('property_list',$property_list)->with('contact',$contact);
     }
 
 }

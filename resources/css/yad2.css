@@ -12,6 +12,9 @@
     width: 100%;
     height: 100%;
 }
+.btn-contact{
+    display: none;
+}
 .main-header{
     position: sticky;
     display: flex;
@@ -101,6 +104,7 @@
     border-radius: 2px;
 }
 .feed-list__item{
+    height: 6.875rem;
     display: grid;
     position: relative;
     cursor: pointer;
@@ -152,24 +156,28 @@
     padding: 0.5rem;
     justify-content: space-between;
 }
+.footer,
 .main-nav__item{
     display: none;
 }
 .partial-detail__asset__data div{
     font-size: 0.75rem;
 }
-.footer{
+.footer,
+.footer-mobile{
     background-color: #363636;
-    padding: 50px 0 10px;
     color: #fff;
     text-align: center!important;
+    padding: 50px 0 10px;
+}
+.footer-mobile{
     padding: 1.25rem 1.25rem 0.625rem;
 }
-.footer-category__links{
+.footer-mobile__category-links{
     margin: 1.6rem 0;
     width: 100%;
 }
-.footer-category__lists{
+.footer-mobile__category-lists{
     display: flex;
     justify-content: space-around;
     font-size: 1.2rem;
@@ -201,7 +209,7 @@
     line-height: .875rem;
     color: #999;
 }
-.footer_menu{
+.footer_menu__moblie{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -410,7 +418,7 @@
         max-width: 960px;
         box-shadow: 0 2px 6px 0 rgb(0 0 0 / 10%);
         border-top: 1px solid #ccc;
-        z-index: 5;
+        z-index: 50;
     }
     .advanced-search__content{
         margin: 1.875rem 2.5rem 0;
@@ -598,7 +606,6 @@
         margin: 0.5rem 0;
     }
     .btn-contact{
-        display: none;
         position: static;
         width: 11.25rem;
         height: 2.1875rem;
@@ -684,6 +691,47 @@
     .asset-price__click{
         justify-content: center;
         height: 40%;
+    }
+    .footer-mobile{
+        display: none;
+    }
+    .footer{
+        display: block;
+        color: #999;
+    }
+    .footer p{
+        width: 52.5rem;
+        margin: 1.25rem auto;
+        font-size: .875rem;
+    }
+    .footer-category__links{
+        width: 58.75rem;
+        margin: 2.5rem auto auto;
+    }
+    .footer-category__lists{
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer-category__link{
+        display: flex;
+        flex: 0.1;
+        text-align: start;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .sub-category__links li{
+        min-width: 4.9rem;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+    }
+    .footer_menu{
+        width: 53rem;
+        display: flex;
+        justify-content: center;
+        margin: 1.25rem auto;
+    }
+    .footer_menu a{
+        padding: 0 1rem;
     }
 }
 @media (min-width: 74.5rem) {

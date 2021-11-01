@@ -8,9 +8,12 @@
     {{-- <link href="http://yad2//css/all.css" rel="stylesheet"> --}}
     <link href="path/to/lightbox.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="path/to/lightbox.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/0.7.19/ua-parser.min.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ mix('/js/all.js') }}"></script>
     @routes
 </head>

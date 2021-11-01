@@ -15,6 +15,8 @@ class PostController extends Controller
 {
     public function newPost(Request $request)
     {
+        $n = new Image();
+
     //////////// contact table
         $contacts = new Contact;
         $contacts->name = $request->name;
@@ -93,6 +95,14 @@ class PostController extends Controller
             }
         }
         return redirect('realestate');
-
     }
+    // public function checkField(Request $request){
+    //     if($request->index == 0){
+    //         $this->validate($request, [
+    //             'property_type' => 'required|in:דירה,דירת גן,גג /פנטהאוז,בית פרטי/קוטג,דופלקס,דירת נופש,מגרשים,חידת דיור',
+    //             'property_condition' => 'required|in:חדש מקבלן,חדש,במצב שמור,דרוש שיפוץ'
+    //             ]);
+    //         }
+    //         return 'aaga';
+    // }
 }

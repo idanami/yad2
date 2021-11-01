@@ -20,39 +20,41 @@ $(document).ready(function(){
         let index = $('.btn-next').index(this);
         let next = false;
         valid = true;
+
         switch (index) {
             case 0:
-                    valid = checkSelected($('#propertyType'));
-                    valid = valid && checkSelected($('#propertyCondition'));
-                    valid = valid && checkLength($('#city'));
-                    valid = valid && checkLength($('#street'));
-                    valid = valid && checkLength($('#houseNumber'));
-                    valid = valid && checkLength($('#floorNumber'));
-                    valid = valid && checkLength($('#totalFloorsInTheBuilding'));
+                    valid = checkSelected('#propertyType');
+                    valid = checkSelected('#propertyCondition');
+                    valid = checkLength('#city');
+                    valid = checkLength('#street');
+                    valid = checkLength('#houseNumber');
+                    valid = checkLength('#floorNumber');
+                    valid = checkLength('#totalFloorsInTheBuilding') && valid;
                     if(valid)
                         next = true;
                     break;
             case 1:
-                    valid = checkSelected($('#roomsNumber'));
-                    valid = valid && checkCheckoBox($('.radio-input:checked'));
-                    valid = valid && checkCheckoBox($('.label-input__balconies:checked'));
-                    valid = valid && checkLength($('#generalDescription'));
+                    valid = checkSelected('#roomsNumber');
+                    // valid = checkCheckoBox($('.radio-input:checked'),55);
+                    // valid = checkCheckoBox($('.label-input__balconies:checked'),55);
+                    valid = checkLength('#generalDescription') && valid;
                     if(valid)
                         next = true;
                     break;
             case 2:
-                    valid = checkLength($('#builtMeter'));
-                    valid = valid && checkLength($('#square_meter_general'));
-                    valid = valid && checkLength($('#pricePost'));
-                    valid = valid && checkLength($('#entryDatePost'));
+                    valid = checkLength('#builtMeter');
+                    valid = checkLength('#square_meter_general');
+                    valid = checkLength('#pricePost');
+                    valid = checkLength('#entryDatePost') && valid;
                     if(valid)
                         next = true;
                     break;
-            case 5:
-                    valid = checkLength($('#contactName'));
-                    valid = valid && checkLength($('#contactPhone'));
-                    valid = valid && checkSelected($('#prefixPhone'));
-                    valid = valid && checkSelected($('#email'));
+            case 3: next = true; break;
+            case 4:
+                    valid = checkLength('#contactName');
+                    valid = checkLength('#contactPhone');
+                    valid = checkSelected('#prefixPhone');
+                    valid = checkLength('#email') && valid;
                     if(valid)
                         next = true;
                     break;
@@ -65,6 +67,7 @@ $(document).ready(function(){
             $('.publish-step__description').eq(index+1).css('display','block')
             $('.publish-step__description').eq(index+2).css('display','none')
         }
+        e.preventDefault()
     })
     $('.btn-add_post').click(function(){
         $('.add-post__form').submit();
@@ -132,19 +135,39 @@ $(document).ready(function(){
             });
         }
     }
-    function checkCheckoBox(element){
-        if(element.val() != 0)
-            return true;
-        return false;
-    }
+    // function checkCheckoBox(element,index){
+    //     if(element.val() != 0){
+    //         $('.error').eq(index).css('display','none')
+    //         return true;
+    //     }
+    //     $('.error').eq(index).css('display','block')
+    //     return false;
+    // }
     function checkSelected(element){
-        if(element.children('option:selected').attr('value') != '')
+        if($(element).children('option:selected').attr('value') != ''){
+            $(`.error${element}Error`).css('display','none')
             return true;
+        }
+        $(`.error${element}Error`).css('display','block')
         return false;
     }
     function checkLength(element){
-        if((element.val().length) > 0)
-            return true;
+        if(($(element).val().length) > 0){
+            if(element == "#pricePost"){
+                if($(element).val() <= 200000){
+                    $(`.error${element}Error`).css('display','none')
+                    $(`.error${element}ISVlideError`).css('display','block')
+                    return false;
+                }
+                else{
+                    $(`.error${element}Error`).css('display','none')
+                    $(`.error${element}ISVlideError`).css('display','none')
+                }
+            }
+                $(`.error${element}Error`).css('display','none')
+                return true;
+        }
+        $(`.error${element}Error`).css('display','block')
         return false;
     }
 })

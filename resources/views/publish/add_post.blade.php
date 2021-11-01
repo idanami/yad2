@@ -6,13 +6,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        @section('title','לוח יד 2')
+        @section('title','הוסף מודעה')
 
     </head>
 <body style="background: #f5f5f5;">
 <main class="main-mobile__asset">
+    @if($errors->any())
+        <div style="width: 50%; height: 25%; font-size: 2rem;" class="alert alert-denger">
+            <ul>
+                @foreach ($errors as $error)
+                   <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+        </div>
+    @endif
     <section class="publish-step allSteps">
-        <form action="newPost" method="POST" class="add-post__form" enctype="multipart/form-data">
+        <form action="newPost" method="POST" class="add-post__form" id="add-post__formId" enctype="multipart/form-data">
             @csrf
             <div class="publish-step__items">
                 <div class="publish-step__description publish-step__description-first">
@@ -182,6 +191,7 @@
                                     <option value="דירת נופש">דירת נופש</option>
                                     <option value="חידת דיור">יחידת דיור</option>
                                 </select>
+                                <div class="error" id="propertyTypeError">שדה חובה סוג הנכס</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="propertyType">מצב הנכס*</label>
@@ -192,27 +202,33 @@
                                 <option value="במצב שמור">במצב שמור</option>
                                 <option value="דרוש שיפוץ">דרוש שיפוץ</option>
                                 </select>
+                                <div class="error" id="propertyConditionError">שדה חובה מצב הנכס</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="city">ישוב*</label>
                                 <input type="text" id="city" name="city" placeholder="איפה נמצא הנכס?">
+                                <div class="error" id="cityError">שדה חובה עיר</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="street">רחוב</label>
                                 <input type="text" id="street" name="street" placeholder="הכנסת שם רחוב">
+                                <div class="error" id="streetError">שדה חובה רחוב</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="houseNumber">מס' בית</label>
                                 <input type="text" id="houseNumber" name="house_number">
+                                <div class="error" id="houseNumberError">שדה חובה מספר בית</div>
                             </div>
                             <div class="addPost-post__item-floors">
                                 <div class="addPost-post__item">
                                     <label for="floorNumber">קומה*</label>
                                     <input type="text" id="floorNumber" name="floor_number" placeholder="הכנסת מספר קומה">
+                                    <div class="error" id="floorNumberError">שדה חובה קומת הדירה</div>
                                 </div>
                                 <div class="addPost-post__item">
                                     <label for="totalFloorsInTheBuilding">סה"כ קומות בבניין*</label>
                                     <input type="text" id="totalFloorsInTheBuilding" name="total_floors_in_the_building" placeholder='הכנסת סה"כ קומות'>
+                                    <div class="error" id="totalFloorsInTheBuildingError">שדה חובה סה"כ קומות בבניין</div>
                                 </div>
                                 <div class="addPost-post__item addPost-post__item-checkbox">
                                     <input type="checkbox" id="checkboxInput">
@@ -221,11 +237,11 @@
                             </div>
                             <div class="addPost-post__item">
                                 <label for="totalFloorsInTheBuilding">שכונה*</label>
-                                <input type="text" id="totalFloorsInTheBuilding" placeholder='הכנסת סה"כ קומות'>
+                                <input type="text" id="totalFloorsInTheBuilding">
                             </div>
                             <div class="addPost-post__item">
                                 <label for="totalFloorsInTheBuilding">אזור מכירה</label>
-                                <input type="text" id="totalFloorsInTheBuilding" placeholder='הכנסת סה"כ קומות'>
+                                <input type="text" id="totalFloorsInTheBuilding">
                             </div>
                         </div>
                         <div class="btn-nextAnd__previous">
@@ -250,29 +266,30 @@
                     <h3 class="publish-category__select__subtitle">על הנכס</h3>
                     <section class="publish-step__items-column">
                         <div class="addPost-post__item characteristics-property">
-                        <label for="roomsNumber">מספר חדרים*</label>
-                        <select name="rooms_number" id="roomsNumber">
-                            <option value="">בחירה מספר חדרים</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="1.5">1.5</option>
-                            <option value="2">2</option>
-                            <option value="2.5">2.5</option>
-                            <option value="3">3</option>
-                            <option value="3.5">3.5</option>
-                            <option value="4">4</option>
-                            <option value="4.5">4.5</option>
-                            <option value="5">5</option>
-                            <option value="5.5">5.5</option>
-                            <option value="6">6</option>
-                            <option value="6.5">6.5</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="1.">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select>
+                            <label for="roomsNumber">מספר חדרים*</label>
+                            <select name="rooms_number" id="roomsNumber">
+                                <option value="">בחירה מספר חדרים</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="1.5">1.5</option>
+                                <option value="2">2</option>
+                                <option value="2.5">2.5</option>
+                                <option value="3">3</option>
+                                <option value="3.5">3.5</option>
+                                <option value="4">4</option>
+                                <option value="4.5">4.5</option>
+                                <option value="5">5</option>
+                                <option value="5.5">5.5</option>
+                                <option value="6">6</option>
+                                <option value="6.5">6.5</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="1.">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <div class="error" id="roomsNumberError">שדה חובה חדרים בדירה</div>
                         </div>
                         <div class="addPost-post__item characteristics-property">
                         <label for="roomsNumber">חניה</label>
@@ -394,6 +411,7 @@
                         <div class="addPost-post__item">
                             <label for="generalDescription">פרוט הנכס</label>
                             <textarea class="generalDescription-textarea" name="general_description" id="generalDescription" maxlength="400" placeholder="זה המקום לתאר את הפרטים הבולטים, למשל, האם נערך שיפוץ במבנה, מה שופץ, כיווני אוויר, האווירה ברחוב וכו'" cols="30" rows="10"></textarea>
+                            <div class="error" id="generalDescriptionError">שדה חובה תיאור כללי</div>
                         </div>
                         </div>
                         <div class="btn-nextAnd__previous">
@@ -420,6 +438,7 @@
                             <div class="addPost-post__item square-property__list">
                                 <label for="squareProperty">מ"ר בנוי</label>
                                 <input type="text" id="builtMeter" name='כמה מ"ר יש בנכס' placeholder="גודל הנכס">
+                                <div class="error" id="builtMeterError">שדה חובה גודל במ"ר</div>
                             </div>
                             <div class="addPost-post__item square-property__list">
                                 <label for="gardenMeter">מ"ר גינה</label>
@@ -430,14 +449,18 @@
                             <div class="addPost-post__item">
                                 <label for="square_meter_general">גודל במ"ר סך הכל*</label>
                                 <input type="text" id="square_meter_general" name="square_meter">
+                                <div class="error" id="square_meter_generalError">שדה חובה גודל כולל של הנכס</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="pricePost">מחיר</label>
                                 <input type="text" id="pricePost" name="price">
+                                <div class="error" id="pricePostError">הוסף מחיר</div>
+                                <div class="error" id="pricePostISVlideError">מחיר שגוי נסה שנית</div>
                             </div>
                             <div class="addPost-post__item">
                                 <label for="entryDatePost">תאריך כניסה</label>
                                 <input type="date" id="entryDatePost" name="entry_date">
+                                <div class="error" id="entryDatePostError">שדה חובה תאריך כניסה</div>
                             </div>
                         </div>
                         <div class="btn-nextAnd__previous">
@@ -657,10 +680,12 @@
                             <div class="addPost-post__item contact-info__item">
                                 <label for="contactName">שם איש קשר*</label>
                                 <input type="text" id="contactName" name="name">
+                                <div class="error" id="contactNameError">שדה חובה שם איש קשר</div>
                             </div>
                             <div class="addPost-post__item contact-info__item">
                                 <label for="contactPhone">טלפון ראשי*</label>
                                 <input type="text" id="contactPhone" name="phone">
+                                <div class="error" id="contactPhoneError">שדה חובה טלפון איש קשר</div>
                             </div>
                             <div class="addPost-post__item contact-info__item">
                                 <select name="prefix_phone" id="prefixPhone">
@@ -675,12 +700,14 @@
                                     <option value="057">057</option>
                                     <option value="058">058</option>
                                 </select>
+                                <div class="error" id="prefixPhoneError">שדה חובה</div>
                             </div>
                             <button class="verifyNumber">המספר אומת</button>
                         </div>
                         <div class="addPost-post__item">
                             <label for="email">דוא"ל</label>
                             <input type="text" id="email" name="email">
+                            <div class="error" id="emailError">שדה חובה אימייל איש קשר</div>
                         </div>
                         <div class="addPost-post__item addPost-post__item-checkbox">
                             <input type="checkbox" id="checkboxInput">

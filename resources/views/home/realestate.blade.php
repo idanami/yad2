@@ -9,6 +9,8 @@
     </head>
 <body>
 
+    <a href="mailto:idanaminov5@gmail.com">stam</a>
+    <a href="https://pic.sopili.net/lnk/-/email-html/show/?text=example%40gmail.com" target="_blank">צור עימנו קשר</a>
     <header class="main-header">
         <div class="main-header__mobile">
             <button class="toggle-button">
@@ -144,7 +146,7 @@
             <h3 class="search-realestate__subtitle">איזה נכס
                 <span>מסחרי</span>
                  תרצו לחפש?</h3>
-            <form action="{{url('/check_advanced')}}" method="get" enctype="multipart/form-data" id="searchInPage" class="form-search__realestate__columns">
+            <form action="{{url('/check_advanced')}}" method="post" enctype="multipart/form-data" id="searchInPage" class="form-search__realestate__columns">
                 @csrf
                 <div class="search-column">
                     <label for="city_search">חפשו אזור, עיר, שכונה או רחוב</label>
@@ -249,15 +251,15 @@
                                 <li class="advanced-search__description">
                                     <div>קומה</div>
                                     <div class="advanced-search__description-input">
-                                        <input type="text" name="floor_min" style="margin-left:0.3rem;">
-                                        <input type="text" name="floor_max">
+                                        <input type="text" name="floor_number" style="margin-left:0.3rem;">
+                                        <input type="text" name="total_floors_in_the_building">
                                     </div>
                                 </li>
                                 <li class="advanced-search__description">
                                     <div>גודל דירה (במ"ר)</div>
                                     <div class="advanced-search__description-input">
-                                        <input type="text" name="size_min" style="margin-left:0.3rem;">
-                                        <input type="text" name="size_max" >
+                                        <input type="text" name="square_meter_min" style="margin-left:0.3rem;">
+                                        <input type="text" name="square_meter_max" >
                                     </div>
                                 </li>
                                 <li class="advanced-search__description">
@@ -272,7 +274,7 @@
                             <ul class="free-search">
                                 <li class="free-search__item">
                                     <div>חיפוש חופשי</div>
-                                    <input class="free-search__item-input" name="free_search" type="text">
+                                    <input class="free-search__item-input" name="general_description" type="text">
                                 </li>
                                 <li class="free-search__item" style="align-self: flex-end; color: #ccc;">
                                     <div class="free-search__item-checkbox">
@@ -382,14 +384,6 @@
                 </button>
             </div>
         </div>
-
-
-            {{-- @foreach ($image as $file)
-                    <a class="example-image-link"  href="{{$file->image}}" data-lightbox="images">
-                        <img class="testimage" src="{{$file->image}}" alt="">
-                    </a> --}}
-            {{-- @endforeach --}}
-            
         </div>
         <section class="all-feed__list" style="margin-top: 1.5rem;">
             @foreach ($property_lists as $index => $property_list)
@@ -517,7 +511,7 @@
                                 </div>
                             </div>
                     </div>
-                    <button class="btn-contact">
+                    <button class="btn-contact" value= "{{ $property_list->contact_id }}">
                         <div class="btn-contact__description">
                             <span class="material-icons" style="color: #fff;">phone_in_talk</span>
                             <i style="color: #fff">הצגת מספר טלפון</i>
@@ -543,12 +537,92 @@
 
     </main>
     <section class="footer">
+        <p>מחפשים דירות למכירה ? בלוח נכסים למכירה של יד2 תמצאו בקלות ובמהירות. מאגר הנכסים למכירה הענק והעדכני שלנו עומד לרשותכם - כל שעליכם לעשות הוא להקליד את פרטי הנכס שמעניין אתכם (מחוז, אזור, ישוב, סוג נכס, מספר חדרים וכו') ומנוע החיפוש שלנו יסנן עבורכם את המודעות הרלוונטיות ביותר. מחפשים דירה למכירה באזור ספציפי? לחצו על "הצג על גבי מפה" ובחרו באזור הגיאוגרפי שבו אתם מעוניינים למצוא דירה למכירה. המערכת תסמן עבורכם את מיקומי הדירות הזמינות, ותוכלו להקליק על כל סימון כדי לצפות במודעה ובפרטי ההתקשרות עם המוכר.</p>
         <div class="footer-category__links">
-            <ul class="footer-category__lists">
-                <li class="footer-category__link">רכב</li>
-                <li class="footer-category__link">נדל"ן</li>
-                <li class="footer-category__link">יד שניה</li>
-                <li class="footer-category__link">דרושים IL</li>
+            <div class="footer-category__lists">
+                <div class="footer-category__link">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">נדל"ן</h4>
+                    <ul class="sub-category__links">
+                        <li><div>מכירה</div></li>
+                        <li><div>השכרה</div></li>
+                        <li><div>שותפים</div></li>
+                        <li><div>כונס נכסים</div></li>
+                        <li><div>מדד ההנדל"ן</div></li>
+                        <li><div>דירות חדשות</div></li>
+                        <li><div>Yzer - בונים החלטות חכמות</div></li>
+                        <li><div>Yadata - הערכת שווי נכס</div></li>
+                    </ul>
+                </div>
+                <div class="footer-category__link" style=" flex: 0.2;">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">רכב</h4>
+                    <ul class="sub-category__links" style="columns: 2;">
+                        <li><div>רכב</div></li>
+                        <li><div>מסחרי</div></li>
+                        <li><div>גיפים</div></li>
+                        <li><div>משאיות</div></li>
+                        <li><div>אופנועים</div></li>
+                        <li><div>קטנועים</div></li>
+                        <li><div>כלי שיט</div></li>
+                        <li><div>מיוחדים</div></li>
+                        <li><div>אביזרים</div></li>
+                        <li><div>מכרזים וכינוס</div></li>
+                        <li><div>מכירון רכב</div></li>
+                        <li><div>מימון רכב</div></li>
+                    </ul>
+                </div>
+                <div class="footer-category__link">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">יד שניה</h4>
+                    <ul class="sub-category__links">
+                        <li><div>לכל המוצרים</div></li>
+                        <li><div>ריהוט</div></li>
+                        <li><div>סלולר</div></li>
+                        <li><div>הכל בחינם</div></li>
+                        <li><div>בזאר יד 2</div></li>
+                    </ul>
+                </div>
+                <div class="footer-category__link">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">חיות מחמד</h4>
+                    <ul class="sub-category__links">
+                        <li><div>כללי</div></li>
+                        <li><div>כלבים</div></li>
+                        <li><div>חתולים</div></li>
+                        <li><div>תוכים ובעלי כנף</div></li>
+                        <li><div>דגים</div></li>
+                        <li><div>זוחלים</div></li>
+                    </ul>
+                </div>
+                <div class="footer-category__link">
+                    <h4 style="color: #fff; margin-bottom: 1rem;">נותני שירות</h4>
+                    <ul class="sub-category__links">
+                        <li><div>מורים פרטיים</div></li>
+                        <li><div>תיירות ונופש</div></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="social_links">
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/apple.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/google-play.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/facebook.png"></a>
+            <a href="" class="footer_icon"><img src="//assets.yad2.co.il/yad2site/y2assets/images/footer/youtube.png"></a>
+        </div>
+        <p style="width: 36.25rem;">כל הזכויות שמורות לחברת קורל תל מפעילות לוח יד2 - לוח מודעות: דרושים IL, דירות להשכרה, בתים למכירה, בתים להשכרה, העברת בתים, הובלות אין לעשות שימוש בכל התכנים המופיעים בלוח יד2.</p>
+        <hr style="width: 26.25rem;">
+        <nav class="footer_menu">
+            <a href="" target="_self" class="footer_menu__list">תקנון</a>
+            <a href="" target="_self" class="footer_menu__list">הצהרת נגישות</a>
+            <a href="" target="_self" class="footer_menu__list">מדיניות פרטיות</a>
+            <a href="" target="_self" class="footer_menu__list">מפת האתר</a>
+            <button class="item btn_item">צור קשר</button>
+        </nav>
+    </section>
+    <section class="footer-mobile">
+        <div class="footer-mobile__category-links">
+            <ul class="footer-mobile__category-lists">
+                <li class="footer-mobile__category-link">רכב</li>
+                <li class="footer-mobile__category-link">נדל"ן</li>
+                <li class="footer-mobile__category-link">יד שניה</li>
+                <li class="footer-mobile__category-link">דרושים IL</li>
             </ul>
         </div>
         <div class="social_links">
@@ -559,7 +633,7 @@
         </div>
         <p class="copyrights_text">כל הזכויות שמורות לחברת קורל תל מפעילות לוח יד2 - לוח מודעות: דרושים IL, דירות להשכרה, בתים למכירה, בתים להשכרה, העברת בתים,הובלות אין לעשות שימוש בכל התכנים המופיעים בלוח יד2.</p>
             <hr>
-            <nav class="footer-menu">
+            <nav class="footer_menu__moblie">
                 <a href="/eula" target="_self" class="footer-menu__link">תקנון</a>
                 <a href="/accessibility_statement" target="_self" class="footer-menu__link">הצהרת נגישות</a>
                 <a href="/privacy" target="_self" class="footer-menu__link">מדיניות פרטיות</a>

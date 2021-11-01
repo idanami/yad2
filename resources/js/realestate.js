@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $('.btn-contact').click(function(){
         let parentIndex = $('.btn-contact').index(this);
-        let idTable = $('.feed-list__item').eq(parentIndex).attr('value');
+        let idTable = $(this).attr('value');
         if($('.contact-details').eq(parentIndex).css('display') == 'none'){
             $('.contact-details').eq(parentIndex).css('display','block');
             $.ajax({
@@ -45,9 +45,11 @@ $(document).ready(function(){
                 url:"allImageById",
                 data:{'value':index_content,'index':index_parent},
                 success:function(data){
-                    for(var i=0;i<data[0].length;i++){
-                        op+='<a href="'+data[0][i].image+'" data-lightbox="imagelist"><img class="testimage" src="'+data[0][i].image+'"> </a>';
-                    }
+                    if(data[0].length > 0){
+                        for(var i=0;i<data[0].length;i++){
+                            op+='<a href="'+data[0][i].image+'" data-lightbox="imagelist' + data[0][i].property_list_id +'"><img class="testimage" src="'+data[0][i].image+'"> </a>';
+                        }
+                    }else op+='<img class="testimage" src="https://assets.yad2.co.il/yad2site/y2assets/images/pages/feed/feed_re_placeholder_small.png">';
                     $('.post-images'+data[1]).append(op);
                     $('.post-images'+data[1]).css('display','block');
                     $('.image-container').eq(data[1]).css('display','none')
