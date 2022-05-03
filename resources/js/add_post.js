@@ -35,8 +35,6 @@ $(document).ready(function(){
                     break;
             case 1:
                     valid = checkSelected('#roomsNumber');
-                    // valid = checkCheckoBox($('.radio-input:checked'),55);
-                    // valid = checkCheckoBox($('.label-input__balconies:checked'),55);
                     valid = checkLength('#generalDescription') && valid;
                     if(valid)
                         next = true;
@@ -135,14 +133,7 @@ $(document).ready(function(){
             });
         }
     }
-    // function checkCheckoBox(element,index){
-    //     if(element.val() != 0){
-    //         $('.error').eq(index).css('display','none')
-    //         return true;
-    //     }
-    //     $('.error').eq(index).css('display','block')
-    //     return false;
-    // }
+
     function checkSelected(element){
         if($(element).children('option:selected').attr('value') != ''){
             $(`.error${element}Error`).css('display','none')

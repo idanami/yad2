@@ -30,7 +30,6 @@ class SendMailForResetPass extends Mailable
      */
     public function build()
     {
-        // return $this->html("hello word");
         return $this->subject('reset password')
                     ->view('auth.password.dynamic_email_template');
     }

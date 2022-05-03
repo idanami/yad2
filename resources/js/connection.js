@@ -7,7 +7,6 @@ function changeType(id,visibil){
         $("#"+id).attr("type","password");
         $("#"+visibil).text('visibility_off')
     }
-
 }
 function approvalOfRegulations(AOR){
      if(AOR.checked){

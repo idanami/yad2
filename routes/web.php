@@ -7,6 +7,9 @@ use App\Http\Controllers\checkAdvancedExist;
 use App\Http\Controllers\GetContact;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Post\PostController;
+use App\Mail\SendMailForResetPass;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/publish', function (){
     return view('publish.publish');
 });

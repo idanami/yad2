@@ -9,7 +9,6 @@
     </head>
 <body>
 
-    <a href="mailto:idanaminov5@gmail.com">stam</a>
     <a href="https://pic.sopili.net/lnk/-/email-html/show/?text=example%40gmail.com" target="_blank">צור עימנו קשר</a>
     <header class="main-header">
         <div class="main-header__mobile">
